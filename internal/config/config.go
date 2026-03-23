@@ -1,6 +1,7 @@
 package config
 
 import (
+	"os"
 	"strings"
 
 	"github.com/knadh/koanf/v2"
@@ -144,7 +145,10 @@ func Load(configPath string) (*Config, error) {
 	// Load from config file if provided
 	if configPath != "" {
 		if err := k.Load(file.Provider(configPath), toml.Parser()); err != nil {
-			return nil, err
+			// If file is missing, ignore and move to env vars
+			if !os.IsNotExist(err) {
+				return nil, err
+			}
 		}
 	}
 
