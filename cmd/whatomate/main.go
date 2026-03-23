@@ -44,6 +44,8 @@ func main() {
 		runServer(os.Args[2:])
 	case "worker":
 		runWorker(os.Args[2:])
+	case "import-omnis":
+		runImportOmnis(os.Args[2:])
 	case "version":
 		fmt.Printf("Whatomate %s (built %s)\n", Version, BuildTime)
 	case "help", "-h", "--help":
@@ -62,10 +64,11 @@ Usage:
   whatomate <command> [options]
 
 Commands:
-  server    Start the API server (with optional embedded workers)
-  worker    Start background workers only (no API server)
-  version   Show version information
-  help      Show this help message
+  server        Start the API server (with optional embedded workers)
+  worker        Start background workers only (no API server)
+  import-omnis  Import omnis payload from config.json into PostgreSQL
+  version       Show version information
+  help          Show this help message
 
 Server Options:
   -config string    Path to config file (default "config.toml")
@@ -602,6 +605,11 @@ func setupRoutes(g *fastglue.Fastglue, app *handlers.App, lo logf.Logger, basePa
 	g.POST("/api/messages/template", app.SendTemplateMessage)
 	g.POST("/api/messages/media", app.SendMediaMessage)
 	g.PUT("/api/messages/{id}/read", app.MarkMessageRead)
+
+	// Omnis
+	g.GET("/api/omnis/categories", app.ListOmnis)
+	g.POST("/api/omnis/send", app.SendOmni)
+	g.POST("/api/omnis/import", app.ImportOmnisZIP)
 
 	// Conversation Notes
 	g.GET("/api/contacts/{id}/notes", app.ListConversationNotes)

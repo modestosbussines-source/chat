@@ -75,7 +75,7 @@ function onRefreshComplete(success: boolean) {
 
 // Response interceptor for error handling
 api.interceptors.response.use(
-  (response) => response,
+  (response: any) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
 
@@ -260,6 +260,18 @@ export const messagesService = {
   },
   sendReaction: (contactId: string, messageId: string, emoji: string) =>
     api.post(`/contacts/${contactId}/messages/${messageId}/reaction`, { emoji })
+}
+
+export const omnisService = {
+  listCategories: () => api.get('/omnis/categories'),
+  send: (contactId: string, scriptId: string) => api.post('/omnis/send', { contact_id: contactId, script_id: scriptId }),
+  importZip: (file: File) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    return api.post('/omnis/import', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+  }
 }
 
 export const templatesService = {

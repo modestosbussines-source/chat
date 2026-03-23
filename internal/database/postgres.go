@@ -99,6 +99,10 @@ func GetMigrationModels() []MigrationModel {
 		{"Catalog", &models.Catalog{}},
 		{"CatalogProduct", &models.CatalogProduct{}},
 
+		// Omnis
+		{"OmniCategory", &models.OmniCategory{}},
+		{"OmniScript", &models.OmniScript{}},
+
 		// Dashboard
 		{"Widget", &models.Widget{}},
 
