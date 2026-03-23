@@ -1,0 +1,62 @@
+# Squad: AI/ML Engine
+# Responsável por funcionalidades de IA, chatbots e automação
+
+squad:
+  id: ai-ml-engine
+  name: AI/ML Engine Squad
+  icon: 🤖
+  description: "Inteligência artificial, chatbots e automação conversacional"
+  
+  lead: "data-engineer (Dara)"
+  
+  members:
+    - agent: data-engineer
+      role: ML/Data Lead
+      responsibilities:
+        - Pipeline de treinamento
+        - Model deployment
+        - Feature engineering
+        - A/B testing framework
+    
+    - agent: analyst
+      role: AI Strategy Advisor
+      responsibilities:
+        - Análise de necessidades de IA
+        - Benchmarking de modelos
+        - Métricas de qualidade
+        - Research em LLMs
+
+  focus_areas:
+    - Chatbot builder visual
+    - Intent recognition pt-BR
+    - Sentiment analysis
+    - Auto-resposta inteligente
+    - Sugestão de respostas
+    - RAG (Retrieval Augmented Generation)
+    - Fine-tuning de modelos pt-BR
+    - Voice-to-text
+
+  workflow: ai-development-cycle
+  sprint_duration: 2 weeks
+  
+  quality_gates:
+    - type: model-accuracy
+      minimum: 85%
+    - type: response-time
+      p95: 500ms
+    - type: hallucination-check
+      maximum: 5%
+
+  deliverables:
+    - Chatbot flow builder
+    - Intent models (pt-BR)
+    - Sentiment analysis API
+    - Auto-response suggestions
+    - Analytics dashboard
+
+  dependencies:
+    internal:
+      - core-platform
+
+  created: 2026-03-23
+  version: 1.0.0

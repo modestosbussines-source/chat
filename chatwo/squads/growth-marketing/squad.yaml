@@ -1,0 +1,78 @@
+# Squad: Growth & Marketing
+# Responsável por aquisição, onboarding, docs e crescimento
+
+squad:
+  id: growth-marketing
+  name: Growth & Marketing Squad
+  icon: 📈
+  description: "Aquisição de usuários, onboarding, documentação e growth hacking"
+  
+  lead: "pm (Morgan)"
+  
+  members:
+    - agent: pm
+      role: Growth Lead / Product Marketing
+      responsibilities:
+        - Growth strategy
+        - Pricing strategy
+        - Product positioning
+        - Feature adoption
+    
+    - agent: analyst
+      role: Market Intelligence
+      responsibilities:
+        - Competitive analysis
+        - User research
+        - Market sizing
+        - Trend analysis
+    
+    - agent: sm
+      role: Content & Onboarding
+      responsibilities:
+        - Documentação pt-BR
+        - Onboarding flow
+        - Tutorials e guides
+        - Community management
+
+  focus_areas:
+    - Landing page otimizada
+    - SEO e content marketing
+    - Onboarding experience
+    - Documentação premium pt-BR
+    - Programa de parceiros
+    - Community building
+    - Email marketing
+    - Demo e trial optimization
+    - Pricing experiments
+    - Referral program
+
+  workflow: growth-experimentation
+  sprint_duration: 1 week
+  
+  quality_gates:
+    - type: conversion-rate
+      landing: 5%
+    - type: onboarding-completion
+      minimum: 70%
+    - type: doc-coverage
+      minimum: 90%
+
+  deliverables:
+    - Landing page
+    - Documentação completa pt-BR
+    - Onboarding wizard
+    - Email sequences
+    - Blog content
+    - Case studies
+    - Pricing page
+
+  kpis:
+    mrr:
+      target_month_3: 50000
+      target_month_6: 200000
+    trial_to_paid: 25
+    nps: 55
+    time_to_value_minutes: 15
+
+  created: 2026-03-23
+  version: 1.0.0

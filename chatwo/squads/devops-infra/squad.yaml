@@ -1,0 +1,63 @@
+# Squad: DevOps & Infrastructure
+# Responsável por deployment, infraestrutura e CI/CD
+
+squad:
+  id: devops-infra
+  name: DevOps & Infrastructure Squad
+  icon: ⚙️
+  description: "Infraestrutura, deployment, monitoramento e DevOps do Omni"
+  
+  lead: "devops (Gage)"
+  
+  members:
+    - agent: devops
+      role: DevOps Engineer Lead
+      responsibilities:
+        - CI/CD pipelines
+        - Docker/Kubernetes
+        - VPS management
+        - Deployment automation
+        - Monitoring e alerting
+    
+    - agent: data-engineer
+      role: Infrastructure Data
+      responsibilities:
+        - Database infrastructure
+        - Backup strategies
+        - Disaster recovery
+        - Performance monitoring
+
+  focus_areas:
+    - Docker Compose configurations
+    - Kubernetes manifests
+    - CI/CD (GitHub Actions)
+    - VPS deployment
+    - SSL/TLS certificates
+    - CDN configuration
+    - Logging e monitoring
+    - Backup e disaster recovery
+    - Security hardening
+    - LGPD data compliance
+
+  workflow: deployment-pipeline
+  sprint_duration: 1 week
+  
+  quality_gates:
+    - type: infrastructure-test
+      required: true
+    - type: security-scan
+      required: true
+    - type: uptime
+      sla: 99.9%
+
+  environments:
+    - name: development
+      auto_deploy: true
+    - name: staging
+      auto_deploy: true
+    - name: production
+      auto_deploy: false
+      require_approval: true
+
+  created: 2026-03-23
+  version: 1.0.0

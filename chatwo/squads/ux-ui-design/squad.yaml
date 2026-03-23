@@ -1,0 +1,71 @@
+# Squad: UX/UI Design
+# Responsável pelo redesign completo da interface e experiência do usuário
+
+squad:
+  id: ux-ui-design
+  name: UX/UI Design Squad
+  icon: 🎨
+  description: "Reformulação completa do design system e interface do Omni"
+  
+  lead: "ux-design-expert (Uma)"
+  
+  members:
+    - agent: ux-design-expert
+      role: UX/UI Lead Designer
+      responsibilities:
+        - Design system completo
+        - User research
+        - Wireframes e prototypes
+        - Component library
+        - Accessibility (WCAG AA)
+    
+    - agent: architect
+      role: Frontend Architecture Advisor
+      responsibilities:
+        - Arquitetura frontend
+        - Component patterns
+        - State management
+        - Performance frontend
+    
+    - agent: dev
+      role: Frontend Developer
+      responsibilities:
+        - Implementação dos componentes
+        - Vue.js / React development
+        - Storybook
+        - CSS/Tailwind implementation
+
+  focus_areas:
+    - Design system (Atomic Design)
+    - Design tokens
+    - Component library (Shadcn/UI)
+    - Responsive design
+    - Dark/Light theme
+    - Micro-interactions
+    - Mobile-first approach
+    - WCAG 2.1 AA compliance
+
+  workflow: design-system-build-quality
+  sprint_duration: 2 weeks
+  
+  quality_gates:
+    - type: design-review
+      agent: ux-design-expert
+    - type: a11y-audit
+      level: AA
+    - type: performance
+      lcp: 2.5s
+
+  deliverables:
+    - Design tokens (tokens.yaml)
+    - Component library
+    - Style guide
+    - Storybook documentation
+    - Accessibility audit report
+
+  dependencies:
+    squads:
+      - core-platform
+
+  created: 2026-03-23
+  version: 1.0.0

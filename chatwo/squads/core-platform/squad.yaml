@@ -1,0 +1,63 @@
+# Squad: Core Platform
+# Responsável pelo desenvolvimento principal da plataforma Omni
+
+squad:
+  id: core-platform
+  name: Core Platform Squad
+  icon: 🚀
+  description: "Desenvolvimento e manutenção da plataforma central de atendimento omnichannel"
+  
+  lead: "dev (Dex)"
+  
+  members:
+    - agent: dev
+      role: Tech Lead / Full-stack Developer
+      responsibilities:
+        - Arquitetura técnica principal
+        - Backend API development
+        - Integrações core (WhatsApp, Instagram, etc.)
+        - Performance e escalabilidade
+    
+    - agent: data-engineer
+      role: Data Engineer
+      responsibilities:
+        - Schema de banco de dados
+        - Migrations e otimização
+        - Analytics pipeline
+        - Data warehouse
+    
+    - agent: architect
+      role: Technical Advisor
+      responsibilities:
+        - Revisão de arquitetura
+        - Decisões técnicas críticas
+        - Technical debt management
+        - API design patterns
+
+  focus_areas:
+    - Backend API (Ruby on Rails / Node.js)
+    - Database schema e migrations
+    - WhatsApp/Instagram/TikTok integrations
+    - WebSocket real-time messaging
+    - Webhook handlers
+    - Performance optimization
+    - Security e LGPD compliance
+
+  workflow: development-cycle
+  sprint_duration: 2 weeks
+  
+  quality_gates:
+    - type: code-review
+      agent: qa
+    - type: test-coverage
+      minimum: 80%
+    - type: security-scan
+      required: true
+
+  dependencies:
+    squads:
+      - ux-ui-design
+      - ai-ml-engine
+
+  created: 2026-03-23
+  version: 1.0.0
