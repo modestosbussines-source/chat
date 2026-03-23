@@ -24,9 +24,9 @@ function handleSelect(button: ButtonConfig) {
   <div class="mt-1">
     <!-- Trigger Button -->
     <button
-      class="w-full bg-white dark:bg-[#202c33] text-[#00a884] text-sm font-medium py-2.5 px-4 rounded-lg shadow-sm border-0 flex items-center justify-center gap-2 transition-colors"
+      class="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white text-sm font-medium py-2.5 px-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2 transition-colors"
       :class="{
-        'hover:bg-gray-50 dark:hover:bg-[#2a3942] cursor-pointer': !disabled,
+        'hover:bg-zinc-50 dark:hover:bg-zinc-900 cursor-pointer': !disabled,
         'opacity-50 cursor-not-allowed': disabled
       }"
       :disabled="disabled"
@@ -49,9 +49,9 @@ function handleSelect(button: ButtonConfig) {
         />
 
         <!-- Panel -->
-        <div class="bg-white dark:bg-[#1f2c34] rounded-t-2xl overflow-hidden animate-slide-up">
+        <div class="bg-white dark:bg-zinc-900 rounded-t-2xl overflow-hidden animate-slide-up border-t border-zinc-200 dark:border-zinc-800">
           <!-- Header -->
-          <div class="bg-[#075e54] dark:bg-[#00a884] text-white px-4 py-3 flex items-center justify-between">
+          <div class="bg-black dark:bg-zinc-800 text-white px-4 py-3 flex items-center justify-between">
             <button
               class="p-1 hover:bg-white/10 rounded transition-colors"
               @click="isOpen = false"
@@ -67,25 +67,25 @@ function handleSelect(button: ButtonConfig) {
             <div
               v-for="(btn, idx) in buttons"
               :key="btn.id"
-              class="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 hover:bg-gray-50 dark:hover:bg-[#2a3942] cursor-pointer flex items-center gap-3 transition-colors"
+              class="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800 last:border-0 hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer flex items-center gap-3 transition-colors"
               @click="handleSelect(btn)"
             >
               <div
                 v-if="btn.type === 'url'"
-                class="w-5 h-5 flex items-center justify-center flex-shrink-0 text-[#00a884]"
+                class="w-5 h-5 flex items-center justify-center flex-shrink-0 text-black dark:text-white"
               >
                 <ExternalLink class="h-4 w-4" />
               </div>
               <div
                 v-else
-                class="w-5 h-5 rounded-full border-2 border-[#00a884] flex items-center justify-center flex-shrink-0"
+                class="w-5 h-5 rounded-full border-2 border-black dark:border-white flex items-center justify-center flex-shrink-0"
               >
-                <span class="text-[10px] text-[#00a884] font-medium">{{ idx + 1 }}</span>
+                <span class="text-[10px] text-black dark:text-white font-medium">{{ idx + 1 }}</span>
               </div>
-              <span class="text-sm text-gray-800 dark:text-gray-200 flex-1">
+              <span class="text-sm text-zinc-900 dark:text-zinc-100 flex-1">
                 {{ btn.title || `Option ${idx + 1}` }}
               </span>
-              <ExternalLink v-if="btn.type === 'url'" class="h-3 w-3 text-gray-400" />
+              <ExternalLink v-if="btn.type === 'url'" class="h-3 w-3 text-zinc-400" />
             </div>
           </div>
         </div>

@@ -918,7 +918,7 @@ function confirmCancel() {
             <div
               :class="[
                 'flex items-center gap-2 p-2 rounded-md cursor-pointer transition-colors mb-2',
-                showFlowSettings ? 'bg-primary/10 border border-primary/20' : 'hover:bg-muted'
+                showFlowSettings ? 'bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700' : 'hover:bg-zinc-50 dark:hover:bg-zinc-900'
               ]"
               @click="selectFlowSettings"
             >
@@ -942,14 +942,14 @@ function confirmCancel() {
                 <div
                   :class="[
                     'group flex items-center gap-2 p-2 rounded-md cursor-pointer transition-colors',
-                    selectedStepIndex === index ? 'bg-primary/10 border border-primary/20' : 'hover:bg-muted'
+                    selectedStepIndex === index ? 'bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700' : 'hover:bg-zinc-50 dark:hover:bg-zinc-900'
                   ]"
                   @click="selectStep(index)"
                 >
                   <GripVertical class="h-4 w-4 text-muted-foreground cursor-grab drag-handle flex-shrink-0" />
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2">
-                      <Badge variant="outline" class="font-mono text-xs px-1.5">{{ index + 1 }}</Badge>
+                      <Badge variant="outline" class="font-mono text-xs px-1.5 border-zinc-200 dark:border-zinc-700">{{ index + 1 }}</Badge>
                       <span class="text-sm font-medium truncate">{{ step.step_name || `Step ${index + 1}` }}</span>
                     </div>
                     <div class="flex items-center gap-1 mt-1 text-xs text-muted-foreground">
@@ -978,11 +978,11 @@ function confirmCancel() {
 
       <!-- Left Resize Handle -->
       <div
-        class="w-1 hover:w-1.5 bg-transparent hover:bg-primary/20 cursor-col-resize transition-all flex-shrink-0 group relative"
+        class="w-1 hover:w-1.5 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-col-resize transition-all flex-shrink-0 group relative"
         @mousedown="startResizeLeft"
       >
         <div class="absolute inset-y-0 -left-1 -right-1"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-8 rounded-full bg-border group-hover:bg-primary/40 transition-colors"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-8 rounded-full bg-border group-hover:bg-zinc-400 dark:group-hover:bg-zinc-600 transition-colors"></div>
       </div>
 
       <!-- Center Panel -->
@@ -1020,11 +1020,11 @@ function confirmCancel() {
 
       <!-- Right Resize Handle -->
       <div
-        class="w-1 hover:w-1.5 bg-transparent hover:bg-primary/20 cursor-col-resize transition-all flex-shrink-0 group relative"
+        class="w-1 hover:w-1.5 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-col-resize transition-all flex-shrink-0 group relative"
         @mousedown="startResizeRight"
       >
         <div class="absolute inset-y-0 -left-1 -right-1"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-8 rounded-full bg-border group-hover:bg-primary/40 transition-colors"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-8 rounded-full bg-border group-hover:bg-zinc-400 dark:group-hover:bg-zinc-600 transition-colors"></div>
       </div>
 
       <!-- Properties Panel (Right) -->

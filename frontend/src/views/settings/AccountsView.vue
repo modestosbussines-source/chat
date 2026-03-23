@@ -293,7 +293,7 @@ const webhookUrl = window.location.origin + basePath + '/api/webhook'
     <PageHeader
       :title="$t('accounts.title')"
       :icon="Phone"
-      icon-gradient="bg-gradient-to-br from-emerald-500 to-green-600 shadow-emerald-500/20"
+      icon-gradient="bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-zinc-800/20"
       back-link="/settings"
       :breadcrumbs="[{ label: $t('settings.title'), href: '/settings' }, { label: $t('settings.accounts') }]"
     >
@@ -363,7 +363,7 @@ const webhookUrl = window.location.origin + basePath + '/api/webhook'
           <div class="p-6">
             <div class="flex items-start justify-between">
               <div class="flex items-start gap-4">
-                <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/20">
+                <div class="h-12 w-12 rounded-lg bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center flex-shrink-0 shadow-lg shadow-zinc-800/20">
                   <Phone class="h-6 w-6 text-white" />
                 </div>
                 <div class="min-w-0">
@@ -507,7 +507,7 @@ const webhookUrl = window.location.origin + basePath + '/api/webhook'
                 <Tooltip>
                   <TooltipTrigger as-child>
                     <Button variant="ghost" size="icon" @click="openProfileDialog(account)">
-                      <Store class="h-4 w-4 text-emerald-500" />
+                      <Store class="h-4 w-4 text-zinc-800" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>{{ $t('accounts.businessProfile') }}</TooltipContent>
@@ -528,7 +528,7 @@ const webhookUrl = window.location.origin + basePath + '/api/webhook'
         <!-- Empty State -->
         <div v-if="accounts.length === 0" class="rounded-xl border border-white/[0.08] bg-white/[0.02] light:bg-white light:border-gray-200">
           <div class="py-12 text-center text-white/50 light:text-gray-500">
-            <div class="h-16 w-16 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/20">
+            <div class="h-16 w-16 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-zinc-800/20">
               <Phone class="h-8 w-8 text-white" />
             </div>
             <p class="text-lg font-medium text-white light:text-gray-900">{{ $t('accounts.noAccounts') }}</p>

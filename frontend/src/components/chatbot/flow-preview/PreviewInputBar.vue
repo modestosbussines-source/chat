@@ -71,17 +71,17 @@ function handleKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="bg-[#f0f2f5] dark:bg-[#202c33] px-3 py-2 flex items-center gap-2">
-    <div class="flex-1 bg-white dark:bg-[#2a3942] rounded-full px-4 py-2">
+  <div class="bg-zinc-100 dark:bg-zinc-900 px-3 py-2 flex items-center gap-2 border-t border-zinc-200 dark:border-zinc-800">
+    <div class="flex-1 bg-white dark:bg-zinc-800 rounded-full px-4 py-2 border border-zinc-200 dark:border-zinc-700">
       <input
         v-if="isEnabled"
         v-model="inputValue"
         :type="inputTypeAttr"
         :placeholder="inputPlaceholder"
-        class="w-full text-sm bg-transparent border-none outline-none text-gray-800 dark:text-gray-200 placeholder:text-gray-400"
+        class="w-full text-sm bg-transparent border-none outline-none text-black dark:text-white placeholder:text-zinc-400"
         @keydown="handleKeydown"
       />
-      <p v-else class="text-sm text-gray-400">
+      <p v-else class="text-sm text-zinc-400">
         {{ disabled ? 'Waiting...' : 'Type a message' }}
       </p>
     </div>
@@ -89,14 +89,14 @@ function handleKeydown(event: KeyboardEvent) {
     <button
       class="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
       :class="{
-        'bg-[#00a884] hover:bg-[#008f6d] cursor-pointer': isEnabled && inputString,
-        'bg-gray-300 dark:bg-gray-600 cursor-not-allowed': !isEnabled || !inputString
+        'bg-black dark:bg-white cursor-pointer': isEnabled && inputString,
+        'bg-zinc-300 dark:bg-zinc-600 cursor-not-allowed': !isEnabled || !inputString
       }"
       :disabled="!isEnabled || !inputString"
       @click="handleSubmit"
     >
-      <Send v-if="inputString" class="h-5 w-5 text-white" />
-      <Mic v-else class="h-5 w-5 text-white" />
+      <Send v-if="inputString" class="h-5 w-5 text-white dark:text-black" />
+      <Mic v-else class="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
     </button>
   </div>
 </template>

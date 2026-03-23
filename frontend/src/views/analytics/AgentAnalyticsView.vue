@@ -515,8 +515,8 @@ void _displayStats.value // Suppress unused warning
             <div class="card-depth rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 light:bg-white light:border-gray-200">
               <div class="flex flex-row items-center justify-between space-y-0 pb-2">
                 <span class="text-sm font-medium text-white/50 light:text-gray-500">{{ $t('agentAnalytics.transfersHandled') }}</span>
-                <div class="h-10 w-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                  <CheckCircle class="h-5 w-5 text-emerald-400" />
+                <div class="h-10 w-10 rounded-lg bg-zinc-800/20 flex items-center justify-center">
+                  <CheckCircle class="h-5 w-5 text-zinc-300" />
                 </div>
               </div>
               <div class="pt-2">

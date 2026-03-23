@@ -176,7 +176,7 @@ const handleLogout = () => {
         >
           <Avatar class="h-7 w-7 ring-2 ring-white/[0.1] light:ring-gray-200">
             <AvatarImage :src="undefined" />
-            <AvatarFallback class="text-xs bg-gradient-to-br from-emerald-500 to-green-600 text-white">
+            <AvatarFallback class="text-xs bg-gradient-to-br from-zinc-800 to-zinc-900 text-white">
               {{ getInitials(authStore.user?.full_name || 'U') }}
             </AvatarFallback>
           </Avatar>
@@ -199,7 +199,7 @@ const handleLogout = () => {
             <span class="text-[13px] text-white/70 light:text-gray-700">{{ $t('userMenu.status') }}</span>
             <Badge
               :class="'text-[10px] px-1.5 py-0 ' + (authStore.isAvailable
-                  ? 'bg-emerald-500/20 text-emerald-400 light:bg-emerald-100 light:text-emerald-700'
+                  ? 'bg-zinc-800/20 text-zinc-300 light:bg-zinc-200 light:text-zinc-700'
                   : 'bg-white/[0.08] text-white/50 light:bg-gray-100 light:text-gray-500')"
             >
               {{ authStore.isAvailable ? $t('userMenu.available') : $t('userMenu.away') }}

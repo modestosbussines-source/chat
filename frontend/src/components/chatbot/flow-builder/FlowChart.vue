@@ -76,19 +76,19 @@ const messageTypeIcons: Record<string, any> = {
 }
 
 const messageTypeColors: Record<string, string> = {
-  text: 'bg-blue-500',
-  buttons: 'bg-purple-500',
-  api_fetch: 'bg-orange-500',
-  whatsapp_flow: 'bg-green-500',
-  transfer: 'bg-amber-500'
+  text: 'bg-black dark:bg-white text-white dark:text-black',
+  buttons: 'bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black',
+  api_fetch: 'bg-zinc-700 dark:bg-zinc-300 text-white dark:text-black',
+  whatsapp_flow: 'bg-zinc-600 dark:bg-zinc-400 text-white dark:text-black',
+  transfer: 'bg-zinc-500 dark:bg-zinc-500 text-white'
 }
 
 const lineColors = [
-  '#8b5cf6', // purple
-  '#06b6d4', // cyan
-  '#f59e0b', // amber
-  '#10b981', // emerald
-  '#ec4899', // pink
+  '#000000', // black
+  '#3f3f46', // zinc-700
+  '#71717a', // zinc-500
+  '#a1a1aa', // zinc-400
+  '#18181b', // zinc-900
 ]
 
 function getStepIcon(messageType: string) {
@@ -445,7 +445,7 @@ function updateConnections() {
     // Start from bottom of START div (below text), end above first step
     newConnections.unshift({
       path: `M ${from.centerX} ${from.bottom} L ${from.centerX} ${to.top - 15}`,
-      color: '#22c55e',
+      color: '#000000',
       label: '',
       labelX: 0,
       labelY: 0
@@ -612,9 +612,9 @@ onUnmounted(() => {
           class="flex flex-col items-center cursor-pointer group mb-16"
           @click="emit('selectFlowSettings')"
         >
-          <span class="mb-2 text-sm font-bold text-green-600">START</span>
-          <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg group-hover:ring-4 group-hover:ring-green-200 transition-all">
-            <Play class="h-7 w-7 text-white" />
+          <span class="mb-2 text-sm font-bold text-black dark:text-white">START</span>
+          <div class="w-16 h-16 rounded-full bg-black dark:bg-white flex items-center justify-center shadow-lg group-hover:ring-4 group-hover:ring-zinc-300 transition-all border border-zinc-200 dark:border-zinc-800">
+            <Play class="h-7 w-7 text-white dark:text-black" />
           </div>
         </div>
 
@@ -624,21 +624,21 @@ onUnmounted(() => {
           <div
             :ref="(el) => setStepRef(el, idx)"
             :class="[
-              'w-80 rounded-xl border-2 shadow-lg cursor-pointer transition-all mb-4 relative',
+              'w-80 rounded-xl border-2 shadow-sm cursor-pointer transition-all mb-4 relative',
               isUnreachable(idx)
-                ? 'border-red-400 bg-red-50 dark:bg-red-900/20 opacity-60'
+                ? 'border-zinc-300 bg-zinc-50 dark:bg-zinc-900/50 opacity-60'
                 : isInLoop(idx)
-                  ? 'border-amber-400 bg-amber-50 dark:bg-amber-900/20'
+                  ? 'border-zinc-400 bg-zinc-100 dark:bg-zinc-800/80'
                   : selectedStepIndex === idx
-                    ? 'border-primary bg-white dark:bg-[#1a1a1a] ring-4 ring-primary/20'
-                    : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-[#1a1a1a] hover:border-gray-300 hover:shadow-xl'
+                    ? 'border-black dark:border-white bg-white dark:bg-[#0a0a0a] ring-2 ring-black/10 dark:ring-white/10'
+                    : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md'
             ]"
             @click="emit('selectStep', idx)"
           >
             <!-- Loop Warning Badge -->
             <div
               v-if="isInLoop(idx) && !isUnreachable(idx)"
-              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md z-10"
+              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm z-10 border border-zinc-700 dark:border-zinc-300"
             >
               <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 12a9 9 0 1 1-6.219-8.56" />
@@ -648,19 +648,19 @@ onUnmounted(() => {
             <!-- Unreachable Warning Badge -->
             <div
               v-if="isUnreachable(idx)"
-              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md z-10"
+              class="absolute -top-3 left-1/2 -translate-x-1/2 bg-zinc-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm z-10"
             >
               <AlertTriangle class="h-3 w-3" />
               UNREACHABLE
             </div>
 
             <!-- Header -->
-            <div :class="['flex items-center gap-3 p-3 rounded-t-xl', isUnreachable(idx) ? 'bg-red-100 dark:bg-red-900/30' : getStepColor(step.message_type) + ' bg-opacity-10 dark:bg-opacity-20']">
-              <div :class="['w-9 h-9 rounded-lg flex items-center justify-center', isUnreachable(idx) ? 'bg-red-400' : getStepColor(step.message_type)]">
-                <component :is="isUnreachable(idx) ? AlertTriangle : getStepIcon(step.message_type)" class="h-4 w-4 text-white" />
+            <div :class="['flex items-center gap-3 p-3 rounded-t-xl border-b border-zinc-100 dark:border-zinc-800', isUnreachable(idx) ? 'bg-zinc-100 dark:bg-zinc-900/50' : 'bg-zinc-50 dark:bg-zinc-900/50']">
+              <div :class="['w-9 h-9 rounded-lg flex items-center justify-center', isUnreachable(idx) ? 'bg-zinc-400' : getStepColor(step.message_type)]">
+                <component :is="isUnreachable(idx) ? AlertTriangle : getStepIcon(step.message_type)" class="h-4 w-4 text-current" />
               </div>
-              <span class="font-semibold text-sm flex-1 truncate">{{ step.step_name || `Step ${idx + 1}` }}</span>
-              <Badge :variant="isUnreachable(idx) ? 'destructive' : 'secondary'" class="text-xs h-6 px-2">{{ idx + 1 }}</Badge>
+              <span class="font-semibold text-sm flex-1 truncate text-zinc-900 dark:text-zinc-100">{{ step.step_name || `Step ${idx + 1}` }}</span>
+              <Badge :variant="isUnreachable(idx) ? 'destructive' : 'secondary'" class="text-xs h-6 px-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border-none">{{ idx + 1 }}</Badge>
             </div>
             <!-- Message -->
             <div class="p-3">
@@ -682,16 +682,16 @@ onUnmounted(() => {
               :key="btnIdx"
               :ref="(el) => setButtonRef(el, idx, btnIdx)"
               :class="[
-                'px-4 py-2.5 rounded-xl border-2 text-sm font-medium shadow-md cursor-pointer transition-all min-w-[120px]',
+                'px-4 py-2.5 rounded-xl border-2 text-sm font-medium shadow-sm cursor-pointer transition-all min-w-[120px]',
                 getButtonDestination(step, idx, btn, btnIdx).targetIdx !== idx + 1
-                  ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400 text-purple-700 dark:text-purple-300 hover:bg-purple-100'
-                  : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50'
+                  ? 'bg-zinc-50 dark:bg-zinc-900 border-zinc-400 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                  : 'bg-white dark:bg-[#0a0a0a] border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600'
               ]"
               @click.stop="emit('selectStep', idx)"
             >
               <div class="text-center">
                 <div class="font-semibold">{{ btn.title || `Button ${btnIdx + 1}` }}</div>
-                <div :class="['text-[10px] mt-1', getButtonDestination(step, idx, btn, btnIdx).targetIdx !== idx + 1 ? 'text-purple-500' : 'text-gray-400']">
+                <div :class="['text-[10px] mt-1', getButtonDestination(step, idx, btn, btnIdx).targetIdx !== idx + 1 ? 'text-zinc-600 dark:text-zinc-400 font-medium' : 'text-zinc-400']">
                   → {{ getButtonDestination(step, idx, btn, btnIdx).targetName }}
                 </div>
               </div>
@@ -730,30 +730,30 @@ onUnmounted(() => {
           </div>
           <div
             :class="[
-              'w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-all',
+              'w-16 h-16 rounded-full flex items-center justify-center shadow-md border border-zinc-200 dark:border-zinc-800 transition-all',
               !isEndReachable && steps.length > 0
-                ? 'bg-gray-400 opacity-50 group-hover:ring-4 group-hover:ring-gray-200'
+                ? 'bg-zinc-200 dark:bg-zinc-800 opacity-50 group-hover:ring-4 group-hover:ring-zinc-100 dark:group-hover:ring-zinc-900'
                 : stepsInLoop.size > 0 && steps.length > 0
-                  ? 'bg-amber-500 group-hover:ring-4 group-hover:ring-amber-200'
-                  : 'bg-red-500 group-hover:ring-4 group-hover:ring-red-200'
+                  ? 'bg-zinc-800 dark:bg-zinc-200 group-hover:ring-4 group-hover:ring-zinc-300 dark:group-hover:ring-zinc-700'
+                  : 'bg-black dark:bg-white group-hover:ring-4 group-hover:ring-zinc-200 dark:group-hover:ring-zinc-800'
             ]"
           >
-            <Flag class="h-7 w-7 text-white" />
+            <Flag class="h-7 w-7 text-white dark:text-black" />
           </div>
           <span :class="[
             'mt-2 text-sm font-bold',
             !isEndReachable && steps.length > 0
-              ? 'text-gray-400'
+              ? 'text-zinc-400'
               : stepsInLoop.size > 0 && steps.length > 0
-                ? 'text-amber-600'
-                : 'text-red-600'
+                ? 'text-zinc-600 dark:text-zinc-400'
+                : 'text-black dark:text-white'
           ]">
             {{ !isEndReachable && steps.length > 0 ? 'UNREACHABLE' : 'END' }}
           </span>
-          <p v-if="!isEndReachable && steps.length > 0" class="text-xs text-red-600 mt-1 text-center max-w-[200px]">
+          <p v-if="!isEndReachable && steps.length > 0" class="text-xs text-zinc-500 mt-1 text-center max-w-[200px]">
             Flow has no exit path - will loop forever
           </p>
-          <p v-else-if="stepsInLoop.size > 0 && steps.length > 0" class="text-xs text-amber-600 mt-1 text-center max-w-[200px]">
+          <p v-else-if="stepsInLoop.size > 0 && steps.length > 0" class="text-xs text-zinc-600 dark:text-zinc-400 mt-1 text-center max-w-[200px]">
             Some paths never reach END
           </p>
         </div>
@@ -761,11 +761,11 @@ onUnmounted(() => {
         <!-- Empty State -->
         <template v-if="steps.length === 0">
           <div
-            class="w-72 py-12 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-primary/5 transition-all my-8"
+            class="w-72 py-12 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 flex flex-col items-center justify-center cursor-pointer hover:border-black dark:hover:border-white hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all my-8"
             @click="emit('addStep')"
           >
-            <Plus class="h-10 w-10 text-gray-400 mb-3" />
-            <span class="text-sm font-medium text-muted-foreground">Add your first step</span>
+            <Plus class="h-10 w-10 text-zinc-400 mb-3" />
+            <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Add your first step</span>
           </div>
         </template>
       </div>

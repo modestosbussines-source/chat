@@ -113,16 +113,16 @@ function handleGoToStep(stepName: string) {
     <!-- Chat Area -->
     <div class="flex-1 flex flex-col min-w-0">
       <!-- Phone Frame Container -->
-      <div class="flex-1 flex items-center justify-center p-4 bg-[#efeae2] dark:bg-[#0b141a]">
-        <div id="preview-phone-frame" class="w-full max-w-sm bg-[#efeae2] dark:bg-[#0b141a] rounded-2xl overflow-hidden shadow-xl flex flex-col h-[600px] relative">
+      <div class="flex-1 flex items-center justify-center p-4 bg-zinc-50 dark:bg-[#0a0a0a]">
+        <div id="preview-phone-frame" class="w-full max-w-sm bg-zinc-50 dark:bg-[#0a0a0a] rounded-2xl overflow-hidden shadow-xl flex flex-col h-[600px] relative border border-zinc-200 dark:border-zinc-800">
           <!-- Chat Header -->
-          <div class="bg-[#075e54] dark:bg-[#202c33] text-white px-4 py-3 flex items-center gap-3 flex-shrink-0">
-            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+          <div class="bg-black dark:bg-white text-white dark:text-black px-4 py-3 flex items-center gap-3 flex-shrink-0">
+            <div class="w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 flex items-center justify-center">
               <MessageSquare class="h-5 w-5" />
             </div>
             <div>
-              <p class="font-medium text-sm">{{ flowData.name || 'Flow Preview' }}</p>
-              <p class="text-xs text-white/70">
+              <p class="font-medium text-sm">{{ flowData.name || 'Omni Flow Preview' }}</p>
+              <p class="text-xs text-white/70 dark:text-black/70">
                 <template v-if="state.status === 'idle'">
                   Click Start to begin
                 </template>

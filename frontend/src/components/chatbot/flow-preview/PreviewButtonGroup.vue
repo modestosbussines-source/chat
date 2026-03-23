@@ -26,9 +26,9 @@ function handleClick(button: ButtonConfig) {
     <button
       v-for="btn in buttons"
       :key="btn.id"
-      class="w-full bg-white dark:bg-[#202c33] text-[#00a884] text-sm font-medium py-2.5 px-4 rounded-lg shadow-sm border-0 flex items-center justify-center gap-1.5 transition-colors"
+      class="w-full bg-white dark:bg-[#1a1a1a] text-black dark:text-white text-sm font-medium py-2.5 px-4 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-1.5 transition-colors"
       :class="{
-        'hover:bg-gray-50 dark:hover:bg-[#2a3942] cursor-pointer': !disabled,
+        'hover:bg-zinc-50 dark:hover:bg-zinc-900 cursor-pointer': !disabled,
         'opacity-50 cursor-not-allowed': disabled
       }"
       :disabled="disabled"

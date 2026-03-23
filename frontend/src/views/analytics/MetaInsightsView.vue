@@ -744,7 +744,7 @@ const chartOptions = {
       :title="$t('metaInsights.title')"
       :description="$t('metaInsights.subtitle')"
       :icon="BarChart3"
-      icon-gradient="bg-gradient-to-br from-green-500 to-emerald-600 shadow-green-500/20"
+      icon-gradient="bg-gradient-to-br from-green-500 to-zinc-900 shadow-green-500/20"
     >
       <template #actions>
         <!-- Account Filter -->
@@ -894,8 +894,8 @@ const chartOptions = {
                 <div class="card-depth rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 light:bg-white light:border-gray-200">
                   <div class="flex flex-row items-center justify-between space-y-0 pb-2">
                     <span class="text-sm font-medium text-white/50 light:text-gray-500">{{ $t('metaInsights.messagesDelivered') }}</span>
-                    <div class="h-10 w-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                      <CheckCircle class="h-5 w-5 text-emerald-400" />
+                    <div class="h-10 w-10 rounded-lg bg-zinc-800/20 flex items-center justify-center">
+                      <CheckCircle class="h-5 w-5 text-zinc-300" />
                     </div>
                   </div>
                   <div class="pt-2">
@@ -969,8 +969,8 @@ const chartOptions = {
                 <div class="card-depth rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 light:bg-white light:border-gray-200">
                   <div class="flex flex-row items-center justify-between space-y-0 pb-2">
                     <span class="text-sm font-medium text-white/50 light:text-gray-500">{{ $t('metaInsights.totalCost') }}</span>
-                    <div class="h-10 w-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                      <DollarSign class="h-5 w-5 text-emerald-400" />
+                    <div class="h-10 w-10 rounded-lg bg-zinc-800/20 flex items-center justify-center">
+                      <DollarSign class="h-5 w-5 text-zinc-300" />
                     </div>
                   </div>
                   <div class="pt-2">
@@ -1058,9 +1058,9 @@ const chartOptions = {
                         <span class="text-sm text-white/70 light:text-gray-600">{{ formatCategory(category as string) }}</span>
                         <span class="font-semibold text-white light:text-gray-900">{{ formatCurrency(cost as number) }}</span>
                       </div>
-                      <div class="flex items-center justify-between py-2 bg-emerald-500/10 rounded px-2 -mx-2">
-                        <span class="text-sm font-medium text-emerald-400 light:text-emerald-600">{{ $t('metaInsights.totalCost') }}</span>
-                        <span class="font-bold text-emerald-400 light:text-emerald-600">{{ formatCurrency((aggregatedData as ReturnType<typeof aggregatePricingData>).totals.cost) }}</span>
+                      <div class="flex items-center justify-between py-2 bg-zinc-800/10 rounded px-2 -mx-2">
+                        <span class="text-sm font-medium text-zinc-300 light:text-zinc-900">{{ $t('metaInsights.totalCost') }}</span>
+                        <span class="font-bold text-zinc-300 light:text-zinc-900">{{ formatCurrency((aggregatedData as ReturnType<typeof aggregatePricingData>).totals.cost) }}</span>
                       </div>
                     </div>
                   </CardContent>
@@ -1123,8 +1123,8 @@ const chartOptions = {
                 <div class="card-depth rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 light:bg-white light:border-gray-200">
                   <div class="flex flex-row items-center justify-between space-y-0 pb-2">
                     <span class="text-sm font-medium text-white/50 light:text-gray-500">{{ $t('metaInsights.delivered') }}</span>
-                    <div class="h-10 w-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                      <CheckCircle class="h-5 w-5 text-emerald-400" />
+                    <div class="h-10 w-10 rounded-lg bg-zinc-800/20 flex items-center justify-center">
+                      <CheckCircle class="h-5 w-5 text-zinc-300" />
                     </div>
                   </div>
                   <div class="pt-2">
@@ -1317,8 +1317,8 @@ const chartOptions = {
                 <div class="card-depth rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 light:bg-white light:border-gray-200">
                   <div class="flex flex-row items-center justify-between space-y-0 pb-2">
                     <span class="text-sm font-medium text-white/50 light:text-gray-500">{{ $t('metaInsights.avgDuration') }}</span>
-                    <div class="h-10 w-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                      <TrendingUp class="h-5 w-5 text-emerald-400" />
+                    <div class="h-10 w-10 rounded-lg bg-zinc-800/20 flex items-center justify-center">
+                      <TrendingUp class="h-5 w-5 text-zinc-300" />
                     </div>
                   </div>
                   <div class="pt-2">
