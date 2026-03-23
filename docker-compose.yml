@@ -35,7 +35,7 @@ services:
       retries: 10
       start_period: 30s
     volumes:
-      - postgres-data-v2:/var/lib/postgresql/data
+      - postgres-data-v3:/var/lib/postgresql/data
 
   redis:
     image: redis:7-alpine
@@ -55,5 +55,5 @@ networks:
   whatomate:
 
 volumes:
-  postgres-data-v2:
+  postgres-data-v3:
   redis-data:
