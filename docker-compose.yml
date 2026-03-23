@@ -28,7 +28,7 @@ services:
       POSTGRES_PASSWORD: ${WHATOMATE_DATABASE_PASSWORD}
       POSTGRES_DB: ${WHATOMATE_DATABASE_NAME:-whatomate}
     healthcheck:
-      test: "pg_isready -U ${WHATOMATE_DATABASE_USER:-whatomate} -d ${WHATOMATE_DATABASE_NAME:-whatomate}"
+      test: ["CMD", "pg_isready", "-q", "-d", "${WHATOMATE_DATABASE_NAME:-whatomate}", "-U", "${WHATOMATE_DATABASE_USER:-whatomate}"]
       interval: 10s
       timeout: 5s
       retries: 10
