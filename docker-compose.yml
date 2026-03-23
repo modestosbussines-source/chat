@@ -15,8 +15,7 @@ services:
     volumes:
       - ./uploads:/app/uploads:rw
       - ./audio:/app/audio:rw
-      - ./config.toml:/app/config.toml:ro
-    command: ["server", "-migrate", "-config", "/app/config.toml"]
+    command: ["server", "-migrate"]
 
   db:
     image: postgres:17-alpine
