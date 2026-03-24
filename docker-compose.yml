@@ -3,12 +3,12 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: whatomate_app
+    container_name: omni_app
     restart: unless-stopped
     ports:
       - "8081:8080"
     networks:
-      - whatomate
+      - omni
     depends_on:
       db:
         condition: service_healthy
@@ -20,16 +20,16 @@ services:
 
   db:
     image: postgres:17-alpine
-    container_name: whatomate_db
+    container_name: omni_db
     restart: unless-stopped
     networks:
-      - whatomate
+      - omni
     environment:
-      POSTGRES_USER: ${WHATOMATE_DATABASE_USER:-whatomate}
-      POSTGRES_PASSWORD: ${WHATOMATE_DATABASE_PASSWORD}
-      POSTGRES_DB: ${WHATOMATE_DATABASE_NAME:-whatomate}
+      POSTGRES_USER: ${OMNI_DATABASE_USER:-omni}
+      POSTGRES_PASSWORD: ${OMNI_DATABASE_PASSWORD}
+      POSTGRES_DB: ${OMNI_DATABASE_NAME:-omni}
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${WHATOMATE_DATABASE_NAME:-whatomate}", "-U", "${WHATOMATE_DATABASE_USER:-whatomate}"]
+      test: ["CMD", "pg_isready", "-q", "-d", "${OMNI_DATABASE_NAME:-omni}", "-U", "${OMNI_DATABASE_USER:-omni}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -39,10 +39,10 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: whatomate_redis
+    container_name: omni_redis
     restart: unless-stopped
     networks:
-      - whatomate
+      - omni
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -52,7 +52,7 @@ services:
       - redis-data:/data
 
 networks:
-  whatomate:
+  omni:
 
 volumes:
   postgres-data-v3:

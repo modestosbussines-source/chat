@@ -6,8 +6,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/middleware"
-	"github.com/shridarpatil/whatomate/test/testutil"
+	"github.com/omni-platform/omni/internal/middleware"
+	"github.com/omni-platform/omni/test/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/valyala/fasthttp"
@@ -47,9 +47,9 @@ func TestCORS(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name         string
-		origin       string
-		wantOrigin   string
+		name       string
+		origin     string
+		wantOrigin string
 	}{
 		{
 			name:       "with origin header",
@@ -77,7 +77,7 @@ func TestCORS(t *testing.T) {
 				req.RequestCtx.Request.Header.Set("Origin", tt.origin)
 			}
 
-			corsMiddleware := middleware.CORS(nil)
+			corsMiddleware := middleware.CORS(nil, false)
 			result := corsMiddleware(req)
 
 			require.NotNil(t, result, "CORS middleware should return request")
@@ -274,19 +274,19 @@ func TestRequirePermission(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name        string
+		name          string
 		hasPermission bool
-		wantAllowed bool
+		wantAllowed   bool
 	}{
 		{
-			name:        "user with permission allowed",
+			name:          "user with permission allowed",
 			hasPermission: true,
-			wantAllowed: true,
+			wantAllowed:   true,
 		},
 		{
-			name:        "user without permission denied",
+			name:          "user without permission denied",
 			hasPermission: false,
-			wantAllowed: false,
+			wantAllowed:   false,
 		},
 	}
 
@@ -337,10 +337,10 @@ func TestRequireAnyPermission(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name           string
-		allowedPerms   map[string]bool
-		checkPerms     []string
-		wantAllowed    bool
+		name         string
+		allowedPerms map[string]bool
+		checkPerms   []string
+		wantAllowed  bool
 	}{
 		{
 			name:         "user with first permission allowed",
@@ -526,7 +526,7 @@ func TestAuth_MultipleMiddlewareChain(t *testing.T) {
 	req.RequestCtx.Request.Header.Set("Origin", "https://example.com")
 
 	// Apply CORS first
-	corsMiddleware := middleware.CORS(nil)
+	corsMiddleware := middleware.CORS(nil, false)
 	req = corsMiddleware(req)
 	require.NotNil(t, req)
 

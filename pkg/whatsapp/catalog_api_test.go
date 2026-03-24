@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

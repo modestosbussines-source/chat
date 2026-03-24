@@ -7,12 +7,12 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/contactutil"
-	"github.com/shridarpatil/whatomate/internal/models"
-	"github.com/shridarpatil/whatomate/internal/queue"
-	"github.com/shridarpatil/whatomate/internal/templateutil"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/contactutil"
+	"github.com/omni-platform/omni/internal/models"
+	"github.com/omni-platform/omni/internal/queue"
+	"github.com/omni-platform/omni/internal/templateutil"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 	"github.com/zerodha/logf"
 	"gorm.io/gorm"
 )

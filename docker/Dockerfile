@@ -1,3 +1,6 @@
+# Omni - WhatsApp Business Platform
+# Dockerfile multi-stage build
+
 # Frontend build stage
 FROM node:22-alpine AS frontend-builder
 
@@ -30,7 +33,7 @@ COPY . .
 COPY --from=frontend-builder /app/frontend/dist/ ./internal/frontend/dist/
 
 # Build the binary
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o whatomate ./cmd/whatomate
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o omni ./cmd/omni
 
 # Piper TTS download stage
 FROM debian:bookworm-slim AS piper-dl
@@ -48,6 +51,9 @@ RUN mkdir -p /tmp/piper-models \
 # Final stage (Debian for glibc — required by Piper TTS)
 FROM debian:bookworm-slim
 
+# Create non-root user for security
+RUN groupadd -r omni && useradd -r -g omni -d /app -s /sbin/nologin omni
+
 WORKDIR /app
 
 # Install runtime dependencies (TTS: espeak-ng, opus-tools; transcoding: ffmpeg)
@@ -56,11 +62,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy binary from builder
-COPY --from=builder /app/whatomate .
+COPY --from=builder /app/omni .
 
 # Copy config example (will be overridden by env vars in production)
 COPY --from=builder /app/config.example.toml ./config.toml
-
 
 # Install Piper TTS binary + shared libraries
 COPY --from=piper-dl /tmp/piper/piper /usr/local/bin/piper
@@ -71,11 +76,15 @@ RUN ldconfig
 # Install default voice model
 COPY --from=piper-dl /tmp/piper-models /opt/piper/models
 
-# Create directories
-RUN mkdir -p /app/uploads /app/audio
+# Create directories and set permissions
+RUN mkdir -p /app/uploads /app/audio \
+    && chown -R omni:omni /app
 
 # Expose port
 EXPOSE 8080
 
+# Switch to non-root user
+USER omni
+
 # Run the binary
-CMD ["./whatomate", "server", "-config", "config.toml", "-migrate"]
+CMD ["./omni", "server", "-config", "config.toml", "-migrate"]

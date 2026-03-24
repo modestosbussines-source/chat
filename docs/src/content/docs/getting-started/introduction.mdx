@@ -1,66 +1,70 @@
 ---
-title: Introduction
-description: Welcome to Whatomate - A modern WhatsApp Business Platform
+title: Sobre o OMNI
+description: Conheça a plataforma de atendimento omnichannel para empresas brasileiras
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<img src="/whatomate/images/dashboard-light.png" alt="Whatomate Dashboard" class="light-only" />
-<img src="/whatomate/images/dashboard-dark.png" alt="Whatomate Dashboard" class="dark-only" />
+## O que é o OMNI?
 
-## What is Whatomate?
+O **OMNI** é uma plataforma profissional de atendimento omnichannel desenvolvida para empresas brasileiras que buscam centralizar suas comunicações com clientes em uma única interface.
 
-Whatomate is a modern WhatsApp Business Platform built with Go (Fastglue) and Vue.js (shadcn-vue). It provides a comprehensive solution for businesses to manage their WhatsApp communications, automate responses, and engage with customers at scale.
+Com o OMNI, sua equipe gerencia conversas do **WhatsApp**, **Instagram** e **email** em um só lugar, enquanto inteligência artificial em português brasileiro ajuda a automatizar respostas e aumentar a eficiência do atendimento.
 
-## Key Features
+## Como funciona
+
+### Para sua empresa
+
+1. **Contratação** — Escolha o plano ideal para seu volume de atendimento
+2. **Setup** — Nossa equipe configura sua conta e conecta seus canais
+3. **Treinamento** — Onboarding completo para sua equipe
+4. **Atendimento** — Sua equipe começa a usar imediatamente
+
+### Para seus clientes
+
+Seus clientes continuam usando os canais que já conhecem — WhatsApp, Instagram, email. A experiência é transparente: eles não percebem que você usa uma plataforma, apenas recebem respostas mais rápidas e eficientes.
+
+## Recursos principais
 
 <CardGrid>
-  <Card title="Multi-tenant Architecture" icon="building">
-    Support multiple organizations with isolated data and configurations.
+  <Card title="Inbox Unificado" icon="chat">
+    Todas as conversas de todos os canais em uma única tela.
   </Card>
-  <Card title="Role-Based Access" icon="approve-check">
-    Three roles (Admin, Manager, Agent) with granular permissions.
+  <Card title="IA em Português" icon="setting">
+    Chatbots treinados para entender português brasileiro com contexto local.
   </Card>
-  <Card title="WhatsApp Cloud API" icon="rocket">
-    Seamless integration with Meta's WhatsApp Business API.
+  <Card title="Múltiplos Atendentes" icon="user">
+    Sua equipe inteira trabalhando junto com ferramentas de colaboração.
   </Card>
-  <Card title="Real-time Chat" icon="comment">
-    Live messaging with WebSocket support for instant communication.
-  </Card>
-  <Card title="Template Management" icon="document">
-    Create and manage message templates approved by Meta.
-  </Card>
-  <Card title="Bulk Messaging" icon="paper-plane">
-    Send campaigns to multiple contacts efficiently.
-  </Card>
-  <Card title="Chatbot Automation" icon="setting">
-    Keyword-based auto-replies, conversation flows, and AI-powered responses.
+  <Card title="API de Integrações" icon="code">
+    Conecte com CRM, ERP e outras ferramentas da sua operação.
   </Card>
 </CardGrid>
 
-## Tech Stack
+## Canais suportados
 
-### Backend
-- **Go 1.21+** with [Fastglue](https://github.com/zerodha/fastglue) (fasthttp-based HTTP framework)
-- **PostgreSQL** for data storage with GORM v2
-- **Redis** for caching and pub/sub
-- **JWT** for authentication
+| Canal | Status | Recursos |
+|-------|--------|----------|
+| **WhatsApp Business** | Disponível | API oficial, templates, mídia, botões |
+| **Instagram** | Disponível | DM, stories mentions |
+| **Email** | Disponível | Tickets, encaminhamento |
+| **Webchat** | Disponível | Widget personalizável para sites |
 
-### Frontend
-- **Vue 3** with Composition API and TypeScript
-- **Vite** for build tooling
-- **shadcn-vue** / Radix Vue for UI components
-- **TailwindCSS** for styling
-- **Pinia** for state management
-- **Vue Query** for server state
+## Segurança e Compliance
 
-## Quick Links
+- **LGPD**: Arquitetura em conformidade com a Lei Geral de Proteção de Dados
+- **Dados no Brasil**: Infraestrutura hospedada em datacenters brasileiros
+- **Criptografia**: TLS 1.3 em trânsito, AES-256 em repouso
+- **Audit Logs**: Registro de todas as ações para compliance
+- **Backup**: Backup diário com retenção de 30 dias
+
+## Próximos passos
 
 <CardGrid>
-  <Card title="Quickstart" icon="rocket">
-    Get up and running in minutes. [Get started →](/whatomate/getting-started/quickstart)
+  <Card title="Primeiros Passos" icon="rocket">
+    Configure sua conta e comece a usar. [Começar →](/docs/getting-started/quickstart)
   </Card>
-  <Card title="API Reference" icon="open-book">
-    Explore the REST API. [View API →](/whatomate/api-reference/overview)
+  <Card title="Ver Planos" icon="document">
+    Escolha o plano ideal para sua empresa. [Ver preços →](/)
   </Card>
 </CardGrid>

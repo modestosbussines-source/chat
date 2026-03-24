@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="50" y="50" width="1100" height="530" rx="20" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="600" y="250" font-family="system-ui, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Whatomate</text>
+  <text x="600" y="340" font-family="system-ui, sans-serif" font-size="36" fill="#94a3b8" text-anchor="middle">Modern WhatsApp Business Platform</text>
+  <rect x="400" y="400" width="400" height="60" rx="10" fill="#22c55e"/>
+  <text x="600" y="440" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Open Source • Self-Hosted</text>
+</svg>

@@ -1,0 +1,355 @@
+---
+// Landing Page Layout
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'Whatomate - Modern WhatsApp Business Platform',
+  description = 'Build powerful WhatsApp Business solutions with our open-source platform. Multi-tenant, chatbot automation, bulk campaigns, and more.'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="title" content={title}>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shridarpatil.github.io/whatomate/">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="/whatomate/images/og-image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://shridarpatil.github.io/whatomate/">
+  <meta property="twitter:title" content={title}>
+  <meta property="twitter:description" content={description}>
+  <meta property="twitter:image" content="/whatomate/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="/whatomate/favicon.svg">
+  <title>{title}</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="landing-header">
+    <div class="header-container">
+      <a href="/whatomate/" class="logo">
+        <span class="logo-icon">💬</span>
+        <span class="logo-text">Whatomate</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#features">Features</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="/whatomate/getting-started/quickstart">Documentation</a>
+        <a href="https://github.com/shridarpatil/whatomate" class="github-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="/whatomate/getting-started/quickstart" class="btn-primary">Get Started</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="landing-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-icon">💬</span>
+            <span class="logo-text">Whatomate</span>
+          </div>
+          <p>A modern, open-source WhatsApp Business Platform built with Go and Vue.js.</p>
+          <div class="social-links">
+            <a href="https://github.com/shridarpatil/whatomate" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+            </a>
+            <a href="https://twitter.com/whatomate" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#use-cases">Use Cases</a>
+          <a href="/whatomate/getting-started/quickstart">Quickstart</a>
+          <a href="/whatomate/api-reference/overview">API Reference</a>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <a href="/whatomate/getting-started/introduction">Documentation</a>
+          <a href="https://github.com/shridarpatil/whatomate/releases">Releases</a>
+          <a href="https://github.com/shridarpatil/whatomate/issues">Issues</a>
+          <a href="https://github.com/shridarpatil/whatomate/blob/main/CONTRIBUTING.md">Contributing</a>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <a href="https://github.com/shridarpatil/whatomate/blob/main/LICENSE">License</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Whatomate. Released under the MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    :root {
+      --color-primary: #22c55e;
+      --color-primary-dark: #16a34a;
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f9fafb;
+      --color-text: #111827;
+      --color-text-secondary: #6b7280;
+      --color-border: #e5e7eb;
+      --header-height: 64px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0f172a;
+        --color-bg-secondary: #1e293b;
+        --color-text: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-border: #334155;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .landing-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .landing-header {
+        background: rgba(15, 23, 42, 0.8);
+      }
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .logo-icon {
+      font-size: 1.5rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .header-nav a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+      color: var(--color-primary);
+    }
+
+    .github-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: white !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .header-nav {
+        display: none;
+      }
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Main */
+    main {
+      margin-top: var(--header-height);
+    }
+
+    /* Footer */
+    .landing-footer {
+      background: var(--color-bg-secondary);
+      border-top: 1px solid var(--color-border);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--color-text-secondary);
+      margin: 1rem 0;
+      max-width: 300px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--color-text-secondary);
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-links h4 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      display: block;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 0.875rem;
+    }
+  </style>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.header-nav');
+    
+    menuToggle?.addEventListener('click', () => {
+      nav?.classList.toggle('show-mobile');
+    });
+  </script>
+</body>
+</html>

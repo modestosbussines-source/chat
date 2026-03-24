@@ -1,0 +1,483 @@
+# OMNI Design System - Design Tokens
+# Visual moderno, minimalista para público brasileiro
+# Autoridade OMNICall - Elegância funcional
+
+meta:
+  version: "2.0.0"
+  author: "UX/UI Design Squad"
+  last_updated: "2026-03-23"
+  description: "Design tokens modernos e minimalistas com personalidade brasileira"
+
+# ============================================================================
+# COLOR SYSTEM
+# Paleta inspirada na estética brasileira contemporânea
+# Cores vibrantes mas elegantes, com contraste acessível
+# ============================================================================
+
+colors:
+  # -------------------------
+  # Core Palette - Cores base
+  # -------------------------
+  primary:
+    50: "hsl(252, 100%, 98%)"   # Lavanda muito suave
+    100: "hsl(252, 100%, 95%)"  # Lavanda claro
+    200: "hsl(252, 95%, 90%)"   # Lavanda
+    300: "hsl(252, 85%, 78%)"   # Lavanda médio
+    400: "hsl(252, 75%, 65%)"   # Índigo suave
+    500: "hsl(252, 70%, 55%)"   # Índigo (primary)
+    600: "hsl(252, 70%, 48%)"   # Índigo escuro
+    700: "hsl(252, 68%, 40%)"   # Índigo mais escuro
+    800: "hsl(252, 65%, 32%)"   # Índigo profundo
+    900: "hsl(252, 60%, 24%)"   # Índigo noite
+
+  secondary:
+    50: "hsl(199, 100%, 97%)"   # Cyan muito suave
+    100: "hsl(199, 100%, 94%)"  # Cyan claro
+    200: "hsl(199, 90%, 88%)"   # Cyan
+    300: "hsl(199, 80%, 76%)"   # Cyan médio
+    400: "hsl(199, 75%, 62%)"   # Azul turquesa
+    500: "hsl(199, 80%, 50%)"   # Azul turquesa (secondary)
+    600: "hsl(199, 80%, 42%)"   # Azul turquesa escuro
+    700: "hsl(199, 78%, 34%)"   # Azul profundo
+    800: "hsl(199, 75%, 26%)"   # Azul noite
+    900: "hsl(199, 70%, 18%)"   # Azul abismo
+
+  # -------------------------
+  # Accent Colors - Acentos vibrantes brasileiros
+  # -------------------------
+  accent:
+    coral:
+      light: "hsl(12, 100%, 72%)"    # Coral suave
+      default: "hsl(12, 100%, 62%)"  # Coral vibrante
+      dark: "hsl(12, 100%, 52%)"     # Coral profundo
+
+    teal:
+      light: "hsl(168, 80%, 65%)"    # Esmeralda clara
+      default: "hsl(168, 80%, 50%)"  # Esmeralda vibrante
+      dark: "hsl(168, 80%, 38%)"     # Esmeralda profunda
+
+    amber:
+      light: "hsl(38, 92%, 70%)"     # Âmbar suave
+      default: "hsl(38, 92%, 58%)"   # Âmbar dourado
+      dark: "hsl(38, 92%, 46%)"      # Âmbar profundo
+
+    pink:
+      light: "hsl(330, 100%, 78%)"   # Rosa suave
+      default: "hsl(330, 100%, 68%)" # Rosa vibrante
+      dark: "hsl(330, 100%, 58%)"    # Rosa profundo
+
+  # -------------------------
+  # Neutral Palette - Tons neutros
+  # -------------------------
+  neutral:
+    0: "hsl(0, 0%, 100%)"      # Branco puro
+    50: "hsl(220, 14%, 98%)"   # Quase branco
+    100: "hsl(220, 14%, 96%)"  # Cinza muito claro
+    200: "hsl(220, 13%, 91%)"  # Cinza claro
+    300: "hsl(220, 12%, 82%)"  # Cinza médio claro
+    400: "hsl(220, 11%, 68%)"  # Cinza médio
+    500: "hsl(220, 10%, 54%)"  # Cinza
+    600: "hsl(220, 10%, 42%)"  # Cinza escuro
+    700: "hsl(220, 12%, 32%)"  # Cinza mais escuro
+    800: "hsl(220, 14%, 22%)"  # Quase preto
+    900: "hsl(220, 16%, 14%)"  # Preto quase puro
+    1000: "hsl(220, 20%, 8%)"  # Preto profundo
+
+  # -------------------------
+  # Semantic Colors - Cores semânticas
+  # -------------------------
+  success:
+    light: "hsl(142, 76%, 90%)"
+    default: "hsl(142, 76%, 36%)"
+    dark: "hsl(142, 76%, 26%)"
+    foreground: "hsl(142, 76%, 96%)"
+
+  warning:
+    light: "hsl(38, 92%, 90%)"
+    default: "hsl(38, 92%, 50%)"
+    dark: "hsl(38, 92%, 40%)"
+    foreground: "hsl(38, 92%, 96%)"
+
+  error:
+    light: "hsl(0, 84%, 92%)"
+    default: "hsl(0, 84%, 60%)"
+    dark: "hsl(0, 84%, 50%)"
+    foreground: "hsl(0, 84%, 96%)"
+
+  info:
+    light: "hsl(199, 100%, 94%)"
+    default: "hsl(199, 100%, 50%)"
+    dark: "hsl(199, 100%, 40%)"
+    foreground: "hsl(199, 100%, 96%)"
+
+  # -------------------------
+  # Theme Colors - Cores de tema
+  # -------------------------
+  background:
+    primary: "hsl(220, 20%, 98%)"     # Fundo principal (light)
+    secondary: "hsl(220, 14%, 96%)"   # Fundo secundário
+    tertiary: "hsl(220, 12%, 93%)"    # Fundo terciário
+    inverse: "hsl(220, 20%, 10%)"     # Fundo inverso
+
+  surface:
+    primary: "hsl(0, 0%, 100%)"       # Superfície cards (light)
+    secondary: "hsl(220, 14%, 98%)"   # Superfície secundária
+    elevated: "hsl(0, 0%, 100%)"      # Superfície elevada
+    overlay: "hsl(220, 20%, 8%)"      # Overlay escuro
+
+  text:
+    primary: "hsl(220, 20%, 12%)"     # Texto principal
+    secondary: "hsl(220, 12%, 46%)"   # Texto secundário
+    tertiary: "hsl(220, 10%, 62%)"    # Texto terciário
+    inverse: "hsl(0, 0%, 100%)"       # Texto inverso
+    link: "hsl(252, 70%, 55%)"        # Links
+    disabled: "hsl(220, 10%, 72%)"    # Texto desabilitado
+
+  border:
+    default: "hsl(220, 13%, 88%)"     # Borda padrão
+    strong: "hsl(220, 13%, 78%)"      # Borda forte
+    subtle: "hsl(220, 13%, 94%)"      # Borda sutil
+    focus: "hsl(252, 70%, 55%)"       # Borda foco
+
+  # -------------------------
+  # Dark Theme Colors
+  # -------------------------
+  dark:
+    background:
+      primary: "hsl(220, 20%, 8%)"
+      secondary: "hsl(220, 18%, 10%)"
+      tertiary: "hsl(220, 16%, 12%)"
+      inverse: "hsl(220, 20%, 98%)"
+
+    surface:
+      primary: "hsl(220, 18%, 12%)"
+      secondary: "hsl(220, 16%, 14%)"
+      elevated: "hsl(220, 18%, 16%)"
+      overlay: "hsl(220, 20%, 92%)"
+
+    text:
+      primary: "hsl(220, 14%, 94%)"
+      secondary: "hsl(220, 10%, 72%)"
+      tertiary: "hsl(220, 8%, 56%)"
+      inverse: "hsl(220, 20%, 10%)"
+      link: "hsl(252, 80%, 72%)"
+      disabled: "hsl(220, 8%, 40%)"
+
+    border:
+      default: "hsl(220, 12%, 24%)"
+      strong: "hsl(220, 12%, 32%)"
+      subtle: "hsl(220, 12%, 18%)"
+      focus: "hsl(252, 80%, 72%)"
+
+# ============================================================================
+# TYPOGRAPHY
+# Sistema tipográfico moderno e legível
+# ============================================================================
+
+typography:
+  font_family:
+    sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    mono: "'JetBrains Mono', 'SF Mono', Consolas, monospace"
+    display: "'Inter', sans-serif"
+
+  font_size:
+    xs: "0.75rem"      # 12px
+    sm: "0.875rem"     # 14px
+    base: "1rem"       # 16px
+    lg: "1.125rem"     # 18px
+    xl: "1.25rem"      # 20px
+    2xl: "1.5rem"      # 24px
+    3xl: "1.875rem"    # 30px
+    4xl: "2.25rem"     # 36px
+    5xl: "3rem"        # 48px
+
+  font_weight:
+    regular: "400"
+    medium: "500"
+    semibold: "600"
+    bold: "700"
+
+  line_height:
+    tight: "1.25"
+    snug: "1.375"
+    normal: "1.5"
+    relaxed: "1.625"
+    loose: "2"
+
+  letter_spacing:
+    tighter: "-0.05em"
+    tight: "-0.025em"
+    normal: "0em"
+    wide: "0.025em"
+    wider: "0.05em"
+    widest: "0.1em"
+
+  text_style:
+    display_large:
+      size: "3rem"
+      weight: "700"
+      line_height: "1.1"
+      tracking: "-0.025em"
+
+    display_medium:
+      size: "2.25rem"
+      weight: "700"
+      line_height: "1.15"
+      tracking: "-0.025em"
+
+    headline_large:
+      size: "1.875rem"
+      weight: "600"
+      line_height: "1.2"
+      tracking: "-0.015em"
+
+    headline_medium:
+      size: "1.5rem"
+      weight: "600"
+      line_height: "1.25"
+      tracking: "-0.01em"
+
+    title_large:
+      size: "1.25rem"
+      weight: "600"
+      line_height: "1.3"
+
+    title_medium:
+      size: "1.125rem"
+      weight: "600"
+      line_height: "1.35"
+
+    body_large:
+      size: "1rem"
+      weight: "400"
+      line_height: "1.5"
+
+    body_medium:
+      size: "0.875rem"
+      weight: "400"
+      line_height: "1.5"
+
+    body_small:
+      size: "0.75rem"
+      weight: "400"
+      line_height: "1.5"
+
+    label_large:
+      size: "0.875rem"
+      weight: "500"
+      line_height: "1.4"
+      tracking: "0.01em"
+
+    label_medium:
+      size: "0.75rem"
+      weight: "500"
+      line_height: "1.4"
+      tracking: "0.02em"
+
+# ============================================================================
+# SPACING
+# Sistema de espaçamento consistente e baseado em 4px
+# ============================================================================
+
+spacing:
+  0: "0"
+  px: "1px"
+  0.5: "0.125rem"   # 2px
+  1: "0.25rem"      # 4px
+  1.5: "0.375rem"   # 6px
+  2: "0.5rem"       # 8px
+  2.5: "0.625rem"   # 10px
+  3: "0.75rem"      # 12px
+  3.5: "0.875rem"   # 14px
+  4: "1rem"         # 16px
+  5: "1.25rem"      # 20px
+  6: "1.5rem"       # 24px
+  7: "1.75rem"      # 28px
+  8: "2rem"         # 32px
+  9: "2.25rem"      # 36px
+  10: "2.5rem"      # 40px
+  11: "2.75rem"     # 44px
+  12: "3rem"        # 48px
+  14: "3.5rem"      # 56px
+  16: "4rem"        # 64px
+  20: "5rem"        # 80px
+  24: "6rem"        # 96px
+  28: "7rem"        # 112px
+  32: "8rem"        # 128px
+
+# ============================================================================
+# BORDER RADIUS
+# Bordas arredondadas modernas e suaves
+# ============================================================================
+
+radius:
+  none: "0"
+  xs: "0.25rem"     # 4px
+  sm: "0.375rem"    # 6px
+  md: "0.5rem"      # 8px
+  lg: "0.75rem"     # 12px
+  xl: "1rem"        # 16px
+  2xl: "1.25rem"    # 20px
+  3xl: "1.5rem"     # 24px
+  full: "9999px"
+
+# ============================================================================
+# SHADOWS
+# Sombras suaves e modernas (elevation system)
+# ============================================================================
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px 0 hsl(220 20% 8% / 0.05)"
+  sm: "0 1px 3px 0 hsl(220 20% 8% / 0.1), 0 1px 2px -1px hsl(220 20% 8% / 0.1)"
+  md: "0 4px 6px -1px hsl(220 20% 8% / 0.1), 0 2px 4px -2px hsl(220 20% 8% / 0.1)"
+  lg: "0 10px 15px -3px hsl(220 20% 8% / 0.1), 0 4px 6px -4px hsl(220 20% 8% / 0.1)"
+  xl: "0 20px 25px -5px hsl(220 20% 8% / 0.1), 0 8px 10px -6px hsl(220 20% 8% / 0.1)"
+  2xl: "0 25px 50px -12px hsl(220 20% 8% / 0.25)"
+  inner: "inset 0 2px 4px 0 hsl(220 20% 8% / 0.05)"
+
+  # Elevation system for components
+  card: "0 1px 3px 0 hsl(220 20% 8% / 0.08), 0 1px 2px -1px hsl(220 20% 8% / 0.08)"
+  card_hover: "0 4px 6px -1px hsl(220 20% 8% / 0.1), 0 2px 4px -2px hsl(220 20% 8% / 0.1)"
+  dropdown: "0 10px 38px -10px hsl(220 20% 8% / 0.15), 0 10px 20px -15px hsl(220 20% 8% / 0.1)"
+  modal: "0 25px 50px -12px hsl(220 20% 8% / 0.2)"
+
+  dark:
+    sm: "0 1px 3px 0 hsl(220 20% 0% / 0.3), 0 1px 2px -1px hsl(220 20% 0% / 0.3)"
+    md: "0 4px 6px -1px hsl(220 20% 0% / 0.4), 0 2px 4px -2px hsl(220 20% 0% / 0.4)"
+    lg: "0 10px 15px -3px hsl(220 20% 0% / 0.4), 0 4px 6px -4px hsl(220 20% 0% / 0.4)"
+
+# ============================================================================
+# TRANSITIONS
+# Animações suaves e elegantes
+# ============================================================================
+
+transitions:
+  duration:
+    instant: "50ms"
+    fast: "100ms"
+    normal: "200ms"
+    moderate: "300ms"
+    slow: "500ms"
+
+  easing:
+    default: "cubic-bezier(0.4, 0, 0.2, 1)"
+    in: "cubic-bezier(0.4, 0, 1, 1)"
+    out: "cubic-bezier(0, 0, 0.2, 1)"
+    in_out: "cubic-bezier(0.4, 0, 0.2, 1)"
+    bounce: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+
+  transition:
+    all: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+    colors: "color, background-color, border-color, text-decoration-color, fill, stroke 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+    opacity: "opacity 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+    shadow: "box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+    transform: "transform 200ms cubic-bezier(0.4, 0, 0.2, 1)"
+
+# ============================================================================
+# Z-INDEX
+# Hierarquia de camadas
+# ============================================================================
+
+z_index:
+  hide: -1
+  auto: auto
+  base: 0
+  dropdown: 1000
+  sticky: 1100
+  fixed: 1200
+  backdrop: 1300
+  overlay: 1400
+  modal: 1500
+  popover: 1600
+  toast: 1700
+  tooltip: 1800
+
+# ============================================================================
+# BREAKPOINTS
+# Points de resposta responsivos
+# ============================================================================
+
+breakpoints:
+  sm: "640px"
+  md: "768px"
+  lg: "1024px"
+  xl: "1280px"
+  2xl: "1536px"
+
+# ============================================================================
+# COMPONENT TOKENS
+# Tokens específicos para componentes
+# ============================================================================
+
+components:
+  button:
+    height:
+      sm: "2rem"       # 32px
+      md: "2.25rem"    # 36px
+      lg: "2.5rem"    # 40px
+      xl: "2.75rem"   # 44px
+    padding_x:
+      sm: "0.75rem"   # 12px
+      md: "1rem"      # 16px
+      lg: "1.5rem"    # 24px
+    gap: "0.5rem"      # 8px
+
+  input:
+    height:
+      sm: "2rem"       # 32px
+      md: "2.25rem"    # 36px
+      lg: "2.5rem"    # 40px
+    padding_x: "0.75rem"  # 12px
+    padding_y: "0.5rem"   # 8px
+
+  card:
+    padding: "1.5rem"     # 24px
+    gap: "1rem"           # 16px
+    border_radius: "0.75rem"  # 12px
+
+  badge:
+    height: "1.25rem"     # 20px
+    padding_x: "0.5rem"   # 8px
+    padding_y: "0.125rem" # 2px
+    font_size: "0.75rem"  # 12px
+
+  avatar:
+    size:
+      xs: "1.5rem"       # 24px
+      sm: "2rem"         # 32px
+      md: "2.5rem"       # 40px
+      lg: "3rem"         # 48px
+      xl: "4rem"         # 64px
+
+  sidebar:
+    width_collapsed: "4rem"     # 64px
+    width_expanded: "16rem"     # 256px
+    width_chat: "18rem"         # 288px
+
+  inbox:
+    conversation_item_height: "4.5rem"  # 72px
+    message_min_height: "2.5rem"        # 40px
+    input_height: "2.75rem"             # 44px
+    thread_gap: "1rem"                  # 16px
+    contact_card_padding: "1rem"        # 16px
+
+# ============================================================================
+# ACCESSIBILITY
+# Tokens de acessibilidade
+# ============================================================================
+
+accessibility:
+  focus_ring:
+    width: "2px"
+    style: "solid"
+    offset: "2px"
+    color: "hsl(252, 70%, 55%)"
+
+  min_touch_target: "2.75rem"  # 44px
+  min_contrast_ratio: 4.5      # WCAG AA
+  large_text_contrast_ratio: 3
+
+  reduced_motion:
+    duration: "0ms"
+    easing: "linear"

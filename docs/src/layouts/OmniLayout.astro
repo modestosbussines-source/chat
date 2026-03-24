@@ -1,0 +1,413 @@
+---
+// OMNI Layout - Minimalist Black & White Design
+// Inspired by Starwind UI aesthetic
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'OMNI — Atendimento Omnichannel',
+  description = 'Plataforma de atendimento omnichannel para o mercado brasileiro. WhatsApp, Instagram, TikTok em uma única tela.'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="title" content={title}>
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content={title}>
+  <meta property="twitter:description" content={description}>
+
+  <link rel="icon" type="image/svg+xml" href="/whatomate/favicon.svg">
+  <title>{title}</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span>OMNI</span>
+      </a>
+      
+      <nav class="nav">
+        <a href="#recursos">Recursos</a>
+        <a href="#precos">Preços</a>
+        <a href="#docs">Documentação</a>
+        <a href="/whatomate/getting-started/quickstart" class="btn btn-outline">Começar</a>
+      </nav>
+      
+      <button class="mobile-toggle" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span>OMNI</span>
+          </a>
+          <p>Plataforma de atendimento omnichannel. Self-host e open-source.</p>
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Produto</h4>
+            <a href="#recursos">Recursos</a>
+            <a href="#precos">Preços</a>
+            <a href="#changelog">Changelog</a>
+          </div>
+          <div class="footer-col">
+            <h4>Documentação</h4>
+            <a href="/whatomate/getting-started/introduction">Introdução</a>
+            <a href="/whatomate/getting-started/quickstart">Quickstart</a>
+            <a href="/whatomate/api-reference/overview">API</a>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Licença MIT</a>
+            <a href="#">Privacidade</a>
+            <a href="#">LGPD</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 OMNI. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <style is:global>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gray-50: #fafafa;
+      --gray-100: #f4f4f5;
+      --gray-200: #e4e4e7;
+      --gray-300: #d4d4d8;
+      --gray-400: #a1a1aa;
+      --gray-500: #71717a;
+      --gray-600: #52525b;
+      --gray-700: #3f3f46;
+      --gray-800: #27272a;
+      --gray-900: #18181b;
+      --gray-950: #09090b;
+      
+      --bg: var(--white);
+      --bg-secondary: var(--gray-50);
+      --text: var(--gray-900);
+      --text-secondary: var(--gray-600);
+      --text-muted: var(--gray-500);
+      --border: var(--gray-200);
+      --border-strong: var(--gray-300);
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --header-height: 64px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: var(--gray-950);
+        --bg-secondary: var(--gray-900);
+        --text: var(--gray-50);
+        --text-secondary: var(--gray-400);
+        --text-muted: var(--gray-500);
+        --border: var(--gray-800);
+        --border-strong: var(--gray-700);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .header {
+        background: rgba(9, 9, 11, 0.8);
+      }
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .mobile-toggle { display: block; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-secondary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-lg {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Main */
+    main {
+      margin-top: var(--header-height);
+    }
+
+    /* Section */
+    .section {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: -0.025em;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      background: var(--bg-secondary);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .footer-brand p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      max-width: 280px;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .footer-links {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .footer-col h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-bottom p {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    /* Utilities */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .text-center { text-align: center; }
+    .text-muted { color: var(--text-muted); }
+    .text-secondary { color: var(--text-secondary); }
+  </style>
+
+  <script>
+    const toggle = document.querySelector('.mobile-toggle');
+    const nav = document.querySelector('.nav');
+    toggle?.addEventListener('click', () => {
+      nav?.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>

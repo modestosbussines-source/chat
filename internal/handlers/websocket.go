@@ -4,21 +4,21 @@ import (
 	"github.com/fasthttp/websocket"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/middleware"
-	ws "github.com/shridarpatil/whatomate/internal/websocket"
+	"github.com/omni-platform/omni/internal/middleware"
+	ws "github.com/omni-platform/omni/internal/websocket"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 )
 
 // newUpgrader creates a WebSocket upgrader that validates origins against the
-// configured allowed origins. If no origins are configured, all are allowed.
-func newUpgrader(allowedOrigins map[string]bool) websocket.FastHTTPUpgrader {
+// configured allowed origins. If no origins are configured, all are allowed in development only.
+func newUpgrader(allowedOrigins map[string]bool, isProduction bool) websocket.FastHTTPUpgrader {
 	return websocket.FastHTTPUpgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 		CheckOrigin: func(ctx *fasthttp.RequestCtx) bool {
 			origin := string(ctx.Request.Header.Peek("Origin"))
-			return middleware.IsOriginAllowed(origin, allowedOrigins)
+			return middleware.IsOriginAllowed(origin, allowedOrigins, isProduction)
 		},
 	}
 }
@@ -26,7 +26,8 @@ func newUpgrader(allowedOrigins map[string]bool) websocket.FastHTTPUpgrader {
 // wsUpgrader returns a WebSocket upgrader configured with the app's allowed origins.
 func (a *App) wsUpgrader() websocket.FastHTTPUpgrader {
 	allowedOrigins := middleware.ParseAllowedOrigins(a.Config.Server.AllowedOrigins)
-	return newUpgrader(allowedOrigins)
+	isProduction := a.Config.App.Environment == "production"
+	return newUpgrader(allowedOrigins, isProduction)
 }
 
 // WebSocketHandler handles WebSocket connections.

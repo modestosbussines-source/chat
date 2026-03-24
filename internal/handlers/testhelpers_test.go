@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/handlers"
-	"github.com/shridarpatil/whatomate/internal/queue"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
-	"github.com/shridarpatil/whatomate/test/testutil"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/handlers"
+	"github.com/omni-platform/omni/internal/queue"
+	"github.com/omni-platform/omni/pkg/whatsapp"
+	"github.com/omni-platform/omni/test/testutil"
 )
 
 // appOption configures an App for testing.

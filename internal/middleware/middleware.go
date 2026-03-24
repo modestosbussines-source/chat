@@ -7,7 +7,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 	"github.com/zerodha/logf"
@@ -61,24 +61,25 @@ func ParseAllowedOrigins(allowedOrigins string) map[string]bool {
 }
 
 // IsOriginAllowed checks if origin is in the allowed set.
-// If no origins are configured, all origins are allowed (development mode).
-func IsOriginAllowed(origin string, allowedOrigins map[string]bool) bool {
+// If no origins are configured, only allows in development mode.
+func IsOriginAllowed(origin string, allowedOrigins map[string]bool, isProduction bool) bool {
 	if len(allowedOrigins) == 0 {
-		return true // No whitelist configured = allow all (development)
+		// In production, never allow all origins
+		return !isProduction
 	}
 	return allowedOrigins[origin]
 }
 
 // CORS handles Cross-Origin Resource Sharing with origin validation.
-func CORS(allowedOrigins map[string]bool) fastglue.FastMiddleware {
+func CORS(allowedOrigins map[string]bool, isProduction bool) fastglue.FastMiddleware {
 	return func(r *fastglue.Request) *fastglue.Request {
 		origin := string(r.RequestCtx.Request.Header.Peek("Origin"))
 
-		if origin != "" && IsOriginAllowed(origin, allowedOrigins) {
+		if origin != "" && IsOriginAllowed(origin, allowedOrigins, isProduction) {
 			r.RequestCtx.Response.Header.Set("Access-Control-Allow-Origin", origin)
 			r.RequestCtx.Response.Header.Set("Access-Control-Allow-Credentials", "true")
-		} else if len(allowedOrigins) == 0 {
-			// Development: no whitelist configured, allow the request origin
+		} else if len(allowedOrigins) == 0 && !isProduction {
+			// Development only: no whitelist configured, allow the request origin
 			if origin != "" {
 				r.RequestCtx.Response.Header.Set("Access-Control-Allow-Origin", origin)
 			}
@@ -103,6 +104,8 @@ func SecurityHeaders() fastglue.FastMiddleware {
 		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
 		h.Set("Permissions-Policy", "camera=(), microphone=(self), geolocation=()")
 		h.Set("X-XSS-Protection", "0") // Disabled per OWASP recommendation (use CSP instead)
+		// Content Security Policy
+		h.Set("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
 		return r
 	}
 }

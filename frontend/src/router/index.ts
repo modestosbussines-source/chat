@@ -52,6 +52,12 @@ const router = createRouter({
           meta: { permission: 'chat' }
         },
         {
+          path: 'inbox',
+          name: 'inbox',
+          component: () => import('@/views/chat/InboxView.vue'),
+          meta: { permission: 'chat' }
+        },
+        {
           path: 'chat/:contactId',
           name: 'chat-conversation',
           component: () => import('@/views/chat/ChatView.vue'),
@@ -81,6 +87,12 @@ const router = createRouter({
           name: 'campaigns',
           component: () => import('@/views/settings/CampaignsView.vue'),
           meta: { permission: 'campaigns' }
+        },
+        {
+          path: 'omnis',
+          name: 'omnis',
+          component: () => import('@/views/settings/OmnisView.vue'),
+          meta: { permission: 'templates' }
         },
         {
           path: 'chatbot',
@@ -205,6 +217,12 @@ const router = createRouter({
           name: 'webhooks',
           component: () => import('@/views/settings/WebhooksView.vue'),
           meta: { permission: 'webhooks' }
+        },
+        {
+          path: 'evolution',
+          name: 'evolution',
+          component: () => import('@/views/evolution/EvolutionView.vue'),
+          meta: { permission: 'accounts' }
         },
         {
           path: 'settings/sso',

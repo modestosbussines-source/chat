@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/contactutil"
-	"github.com/shridarpatil/whatomate/internal/models"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
+	"github.com/omni-platform/omni/internal/contactutil"
+	"github.com/omni-platform/omni/internal/models"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 )
 
 // IncomingTextMessage represents a text, interactive, or media message from the webhook
@@ -1130,7 +1130,7 @@ func (a *App) sendFlowCompletionWebhook(flow *models.ChatbotFlow, session *model
 
 	// Set default headers
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "Whatomate-Webhook/1.0")
+	req.Header.Set("User-Agent", "Omni-Webhook/1.0")
 
 	// Add custom headers if configured
 	if headers, ok := config["headers"].(map[string]interface{}); ok {

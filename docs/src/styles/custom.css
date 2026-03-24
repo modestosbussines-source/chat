@@ -1,43 +1,78 @@
-/* WhatsApp green accent colors */
+/* OMNI Design System - Minimalist Black & White */
+
+/* Light Mode */
 :root {
-  --sl-color-accent-low: #064e3b;
-  --sl-color-accent: #25d366;
-  --sl-color-accent-high: #86efac;
+  --sl-color-accent-low: #e4e4e7;
+  --sl-color-accent: #18181b;
+  --sl-color-accent-high: #27272a;
   --sl-color-white: #ffffff;
-  --sl-color-gray-1: #f8fafc;
-  --sl-color-gray-2: #e2e8f0;
-  --sl-color-gray-3: #cbd5e1;
-  --sl-color-gray-4: #94a3b8;
-  --sl-color-gray-5: #64748b;
-  --sl-color-gray-6: #334155;
-  --sl-color-black: #0f172a;
+  --sl-color-gray-1: #fafafa;
+  --sl-color-gray-2: #f4f4f5;
+  --sl-color-gray-3: #e4e4e7;
+  --sl-color-gray-4: #a1a1aa;
+  --sl-color-gray-5: #71717a;
+  --sl-color-gray-6: #3f3f46;
+  --sl-color-black: #09090b;
 }
 
+/* Dark Mode */
 :root[data-theme='dark'] {
-  --sl-color-accent-low: #064e3b;
-  --sl-color-accent: #25d366;
-  --sl-color-accent-high: #86efac;
-  --sl-color-white: #0f172a;
-  --sl-color-gray-1: #1e293b;
-  --sl-color-gray-2: #334155;
-  --sl-color-gray-3: #475569;
-  --sl-color-gray-4: #64748b;
-  --sl-color-gray-5: #94a3b8;
-  --sl-color-gray-6: #cbd5e1;
-  --sl-color-black: #f8fafc;
+  --sl-color-accent-low: #27272a;
+  --sl-color-accent: #fafafa;
+  --sl-color-accent-high: #f4f4f5;
+  --sl-color-white: #09090b;
+  --sl-color-gray-1: #18181b;
+  --sl-color-gray-2: #27272a;
+  --sl-color-gray-3: #3f3f46;
+  --sl-color-gray-4: #71717a;
+  --sl-color-gray-5: #a1a1aa;
+  --sl-color-gray-6: #d4d4d8;
+  --sl-color-black: #fafafa;
 }
 
-/* Image frames for dark mode visibility */
+/* Image frames */
 img {
   border-radius: 8px;
   border: 1px solid var(--sl-color-gray-3);
 }
 
-/* Theme-aware screenshots: show light image by default, dark in dark mode */
+/* Theme-aware screenshots */
 :root[data-theme='light'] .dark-only,
 :root:not([data-theme='dark']) .dark-only {
   display: none !important;
 }
 :root[data-theme='dark'] .light-only {
   display: none !important;
+}
+
+/* Performance */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* Focus styles */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Code blocks */
+pre {
+  overflow-x: auto;
+}
+
+/* Print */
+@media print {
+  .sidebar,
+  .search,
+  nav {
+    display: none !important;
+  }
 }

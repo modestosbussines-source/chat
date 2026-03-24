@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/models"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -102,6 +102,11 @@ func GetMigrationModels() []MigrationModel {
 		// Omnis
 		{"OmniCategory", &models.OmniCategory{}},
 		{"OmniScript", &models.OmniScript{}},
+		{"OmniSequence", &models.OmniSequence{}},
+		{"OmniSequenceStep", &models.OmniSequenceStep{}},
+
+		// Evolution Integration
+		{"EvolutionInstance", &models.EvolutionInstance{}},
 
 		// Dashboard
 		{"Widget", &models.Widget{}},

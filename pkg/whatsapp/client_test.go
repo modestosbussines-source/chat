@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
-	"github.com/shridarpatil/whatomate/test/testutil"
+	"github.com/omni-platform/omni/pkg/whatsapp"
+	"github.com/omni-platform/omni/test/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

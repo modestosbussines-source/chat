@@ -1,10 +1,10 @@
-# Contributing to Whatomate
+# Contributing to Omni
 
 Thanks for your interest in contributing.
 
 ## Contribution Guidelines
 
-- **All PRs must align with the project’s scope, goals, and technical direction.**
+- **All PRs must align with the project's scope, goals, and technical direction.**
 - **Large or non-trivial PRs should be discussed first via an issue.**
 - Bug fixes and documentation improvements do **not** require prior discussion.
 - Please keep PRs focused on a single concern where possible.
@@ -12,11 +12,11 @@ Thanks for your interest in contributing.
 ## Process
 
 - **Propose first (for large changes)**  
-  Open an issue describing what you want to build, why it fits Whatomate,
+  Open an issue describing what you want to build, why it fits Omni,
   and the high-level implementation approach.
 
 - **Keep PRs small**  
   Smaller, well-scoped PRs are easier to review and test.
   Bundling multiple features into a single PR is discouraged.
 
-Thanks for helping keep Whatomate focused and maintainable.
+Thanks for helping keep Omni focused and maintainable.

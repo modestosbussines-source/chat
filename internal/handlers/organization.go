@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/database"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/database"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 )

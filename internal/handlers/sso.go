@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	appcrypto "github.com/shridarpatil/whatomate/internal/crypto"
-	"github.com/shridarpatil/whatomate/internal/models"
+	appcrypto "github.com/omni-platform/omni/internal/crypto"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 	"golang.org/x/oauth2"

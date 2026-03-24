@@ -23,13 +23,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
-import { LogOut, User } from 'lucide-vue-next'
+import { LogOut, User, Settings, Moon, Sun, Globe } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
-import { getInitials } from '@/lib/utils'
-import ThemeSwitcher from './ThemeSwitcher.vue'
+import { getInitials, getAvatarGradient } from '@/lib/utils'
+import { useColorMode } from '@/composables/useColorMode'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 
 const { t } = useI18n()
+const { isDark, toggleTheme } = useColorMode()
 
 defineProps<{
   collapsed?: boolean
@@ -109,7 +110,6 @@ const setAvailability = async (checked: boolean) => {
   }
 }
 
-// Break duration tracking
 const breakDuration = ref('')
 let breakTimerInterval: ReturnType<typeof setInterval> | null = null
 
@@ -163,84 +163,129 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <div class="border-t border-white/[0.08] light:border-gray-200 p-2">
+  <div class="border-t border-border p-3">
     <Popover v-model:open="isUserMenuOpen">
       <PopoverTrigger as-child>
         <Button
           variant="ghost"
           :class="[
-            'flex items-center justify-start w-full h-auto px-2 py-1.5 gap-2 hover:bg-white/[0.04] light:hover:bg-gray-100',
+            'flex items-center justify-start w-full h-auto px-2 py-2 gap-3 hover:bg-muted rounded-lg',
             collapsed && 'md:justify-center'
           ]"
           aria-label="User menu"
         >
-          <Avatar class="h-7 w-7 ring-2 ring-white/[0.1] light:ring-gray-200">
-            <AvatarImage :src="undefined" />
-            <AvatarFallback class="text-xs bg-gradient-to-br from-zinc-800 to-zinc-900 text-white">
-              {{ getInitials(authStore.user?.full_name || 'U') }}
-            </AvatarFallback>
-          </Avatar>
-          <div v-if="!collapsed" class="flex flex-col items-start text-left">
-            <span class="text-[13px] font-medium truncate max-w-[140px] text-white light:text-gray-900">
+          <div class="relative">
+            <Avatar class="h-9 w-9 ring-2 ring-border">
+              <AvatarImage :src="undefined" />
+              <AvatarFallback :class="'text-sm bg-gradient-to-br text-white ' + getAvatarGradient(authStore.user?.full_name || 'U')">
+                {{ getInitials(authStore.user?.full_name || 'U') }}
+              </AvatarFallback>
+            </Avatar>
+            <div
+              :class="[
+                'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-card',
+                authStore.isAvailable ? 'bg-success' : 'bg-muted-foreground'
+              ]"
+            />
+          </div>
+          <div v-if="!collapsed" class="flex flex-col items-start text-left flex-1 min-w-0">
+            <span class="text-sm font-medium truncate max-w-[140px] text-foreground">
               {{ authStore.user?.full_name }}
             </span>
-            <span class="text-[11px] text-white/40 light:text-gray-500 truncate max-w-[140px]">
+            <span class="text-xs text-muted-foreground truncate max-w-[140px]">
               {{ authStore.user?.email }}
             </span>
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent side="top" align="start" class="w-52 p-1.5 bg-[#141414] light:bg-white border-white/[0.08] light:border-gray-200">
-        <div class="text-xs font-medium px-2 py-1 text-white/40 light:text-gray-500">{{ $t('userMenu.myAccount') }}</div>
-        <Separator class="my-1 bg-white/[0.08] light:bg-gray-200" />
-        <!-- Availability Toggle -->
-        <div class="flex items-center justify-between px-2 py-1.5">
-          <div class="flex items-center gap-2">
-            <span class="text-[13px] text-white/70 light:text-gray-700">{{ $t('userMenu.status') }}</span>
-            <Badge
-              :class="'text-[10px] px-1.5 py-0 ' + (authStore.isAvailable
-                  ? 'bg-zinc-800/20 text-zinc-300 light:bg-zinc-200 light:text-zinc-700'
-                  : 'bg-white/[0.08] text-white/50 light:bg-gray-100 light:text-gray-500')"
-            >
-              {{ authStore.isAvailable ? $t('userMenu.available') : $t('userMenu.away') }}
-            </Badge>
-            <span v-if="!authStore.isAvailable && breakDuration" class="text-[10px] text-white/40 light:text-gray-400">
-              {{ breakDuration }}
-            </span>
+      <PopoverContent side="top" align="start" class="w-64 p-2">
+        <!-- User Info -->
+        <div class="flex items-center gap-3 px-2 py-3 border-b border-border mb-2">
+          <Avatar class="h-10 w-10">
+            <AvatarImage :src="undefined" />
+            <AvatarFallback :class="'text-sm bg-gradient-to-br text-white ' + getAvatarGradient(authStore.user?.full_name || 'U')">
+              {{ getInitials(authStore.user?.full_name || 'U') }}
+            </AvatarFallback>
+          </Avatar>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-foreground truncate">
+              {{ authStore.user?.full_name }}
+            </p>
+            <p class="text-xs text-muted-foreground truncate">
+              {{ authStore.user?.email }}
+            </p>
           </div>
-          <Switch
-            :checked="authStore.isAvailable"
-            :disabled="isUpdatingAvailability || isCheckingTransfers"
-            aria-label="Toggle availability status"
-            @update:checked="handleAvailabilityChange"
-          />
         </div>
-        <Separator class="my-1 bg-white/[0.08] light:bg-gray-200" />
-        <RouterLink to="/profile">
+
+        <!-- Availability Toggle -->
+        <div class="px-2 py-2 mb-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-foreground">{{ $t('userMenu.status') }}</span>
+              <Badge
+                :class="authStore.isAvailable 
+                  ? 'bg-success/10 text-success' 
+                  : 'bg-muted text-muted-foreground'"
+              >
+                {{ authStore.isAvailable ? $t('userMenu.available') : $t('userMenu.away') }}
+              </Badge>
+            </div>
+            <Switch
+              :checked="authStore.isAvailable"
+              :disabled="isUpdatingAvailability || isCheckingTransfers"
+              aria-label="Toggle availability status"
+              @update:checked="handleAvailabilityChange"
+            />
+          </div>
+          <p v-if="!authStore.isAvailable && breakDuration" class="text-xs text-muted-foreground mt-1">
+            Ausente há {{ breakDuration }}
+          </p>
+        </div>
+
+        <Separator class="my-2" />
+
+        <!-- Menu Items -->
+        <div class="space-y-1">
+          <RouterLink to="/profile" @click="isUserMenuOpen = false">
+            <Button
+              variant="ghost"
+              class="w-full justify-start px-2 py-2 h-auto text-sm font-normal"
+            >
+              <User class="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>{{ $t('userMenu.profile') }}</span>
+            </Button>
+          </RouterLink>
+
           <Button
             variant="ghost"
-            class="w-full justify-start px-2 py-1 h-auto text-[13px] font-normal text-white/70 hover:text-white hover:bg-white/[0.04] light:text-gray-600 light:hover:text-gray-900 light:hover:bg-gray-100"
-            @click="isUserMenuOpen = false"
+            class="w-full justify-start px-2 py-2 h-auto text-sm font-normal"
+            @click="toggleTheme"
           >
-            <User class="mr-2 h-3.5 w-3.5" aria-hidden="true" />
-            <span>{{ $t('userMenu.profile') }}</span>
+            <Sun v-if="isDark" class="mr-2 h-4 w-4 text-muted-foreground" />
+            <Moon v-else class="mr-2 h-4 w-4 text-muted-foreground" />
+            <span>{{ isDark ? 'Modo claro' : 'Modo escuro' }}</span>
           </Button>
-        </RouterLink>
-        <Separator class="my-1 bg-white/[0.08] light:bg-gray-200" />
-        <div class="text-xs font-medium px-2 py-1 text-white/40 light:text-gray-500">{{ $t('userMenu.theme') }}</div>
-        <ThemeSwitcher />
-        <Separator class="my-1 bg-white/[0.08] light:bg-gray-200" />
-        <div class="text-xs font-medium px-2 py-1 text-white/40 light:text-gray-500">{{ $t('userMenu.language') }}</div>
-        <div class="px-1.5 py-1">
-          <LanguageSwitcher />
+
+          <div class="px-2 py-1">
+            <div class="flex items-center gap-2 text-sm text-muted-foreground">
+              <Globe class="h-4 w-4" />
+              <span>{{ $t('userMenu.language') }}</span>
+            </div>
+            <div class="mt-1">
+              <LanguageSwitcher />
+            </div>
+          </div>
         </div>
-        <Separator class="my-1 bg-white/[0.08] light:bg-gray-200" />
+
+        <Separator class="my-2" />
+
+        <!-- Logout -->
         <Button
           variant="ghost"
-          class="w-full justify-start px-2 py-1 h-auto text-[13px] font-normal text-white/70 hover:text-white hover:bg-white/[0.04] light:text-gray-600 light:hover:text-gray-900 light:hover:bg-gray-100"
+          class="w-full justify-start px-2 py-2 h-auto text-sm font-normal text-destructive hover:text-destructive hover:bg-destructive/10"
           @click="handleLogout"
         >
-          <LogOut class="mr-2 h-3.5 w-3.5" aria-hidden="true" />
+          <LogOut class="mr-2 h-4 w-4" />
           <span>{{ $t('userMenu.logOut') }}</span>
         </Button>
       </PopoverContent>

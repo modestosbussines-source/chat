@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/contactutil"
-	"github.com/shridarpatil/whatomate/internal/models"
-	"github.com/shridarpatil/whatomate/internal/websocket"
+	"github.com/omni-platform/omni/internal/contactutil"
+	"github.com/omni-platform/omni/internal/models"
+	"github.com/omni-platform/omni/internal/websocket"
 )
 
 // processCallWebhook handles a call webhook event for both incoming and outgoing calls.

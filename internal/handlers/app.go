@@ -7,14 +7,15 @@ import (
 	"sync"
 
 	"github.com/google/uuid"
+	"github.com/omni-platform/omni/internal/calling"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/integrations"
+	"github.com/omni-platform/omni/internal/queue"
+	"github.com/omni-platform/omni/internal/storage"
+	"github.com/omni-platform/omni/internal/tts"
+	"github.com/omni-platform/omni/internal/websocket"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 	"github.com/redis/go-redis/v9"
-	"github.com/shridarpatil/whatomate/internal/calling"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/queue"
-	"github.com/shridarpatil/whatomate/internal/storage"
-	"github.com/shridarpatil/whatomate/internal/tts"
-	"github.com/shridarpatil/whatomate/internal/websocket"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 	"github.com/zerodha/logf"
@@ -39,6 +40,8 @@ type App struct {
 	TTS *tts.PiperTTS
 	// S3Client for serving call recording presigned URLs (nil when not configured)
 	S3Client *storage.S3Client
+	// IntegrationManager handles external integrations like Evolution API
+	IntegrationManager *integrations.Manager
 	// wg tracks background goroutines for graceful shutdown
 	wg sync.WaitGroup
 }
@@ -103,7 +106,7 @@ func (a *App) getOrgID(r *fastglue.Request) (uuid.UUID, error) {
 func (a *App) HealthCheck(r *fastglue.Request) error {
 	return r.SendEnvelope(map[string]string{
 		"status":  "ok",
-		"service": "whatomate",
+		"service": "omni",
 	})
 }
 

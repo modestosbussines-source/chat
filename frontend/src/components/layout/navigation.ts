@@ -21,7 +21,9 @@ import {
   Tags,
   Phone,
   PhoneCall,
-  PhoneForwarded
+  PhoneForwarded,
+  Inbox,
+  Smartphone
 } from 'lucide-vue-next'
 import type { Component } from 'vue'
 
@@ -46,6 +48,18 @@ export const navigationItems: NavItem[] = [
     path: '/chat',
     icon: MessageSquare,
     permission: 'chat'
+  },
+  {
+    name: 'nav.inbox',
+    path: '/inbox',
+    icon: Inbox,
+    permission: 'chat'
+  },
+  {
+    name: 'nav.evolution',
+    path: '/evolution',
+    icon: Smartphone,
+    permission: 'accounts'
   },
   {
     name: 'nav.chatbot',
@@ -82,6 +96,12 @@ export const navigationItems: NavItem[] = [
     name: 'nav.templates',
     path: '/templates',
     icon: FileText,
+    permission: 'templates'
+  },
+  {
+    name: 'nav.omnis',
+    path: '/omnis',
+    icon: Zap,
     permission: 'templates'
   },
   {

@@ -11,11 +11,11 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/pion/webrtc/v4"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/models"
-	"github.com/shridarpatil/whatomate/internal/storage"
-	"github.com/shridarpatil/whatomate/internal/websocket"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/models"
+	"github.com/omni-platform/omni/internal/storage"
+	"github.com/omni-platform/omni/internal/websocket"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 	"github.com/zerodha/logf"
 	"gorm.io/gorm"
 )

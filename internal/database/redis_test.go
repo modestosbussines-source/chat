@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/database"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/database"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

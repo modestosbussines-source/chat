@@ -4,27 +4,49 @@ import (
 	"os"
 	"strings"
 
-	"github.com/knadh/koanf/v2"
 	"github.com/knadh/koanf/parsers/toml"
 	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/providers/file"
+	"github.com/knadh/koanf/v2"
 )
 
 // Config holds all configuration for the application
 type Config struct {
-	App           AppConfig           `koanf:"app"`
-	Server        ServerConfig        `koanf:"server"`
-	Database      DatabaseConfig      `koanf:"database"`
-	Redis         RedisConfig         `koanf:"redis"`
-	JWT           JWTConfig           `koanf:"jwt"`
-	WhatsApp      WhatsAppConfig      `koanf:"whatsapp"`
-	AI            AIConfig            `koanf:"ai"`
-	Storage       StorageConfig       `koanf:"storage"`
-	DefaultAdmin  DefaultAdminConfig  `koanf:"default_admin"`
-	RateLimit     RateLimitConfig     `koanf:"rate_limit"`
-	Cookie        CookieConfig        `koanf:"cookie"`
-	Calling       CallingConfig       `koanf:"calling"`
-	TTS           TTSConfig           `koanf:"tts"`
+	App          AppConfig          `koanf:"app"`
+	Server       ServerConfig       `koanf:"server"`
+	Database     DatabaseConfig     `koanf:"database"`
+	Redis        RedisConfig        `koanf:"redis"`
+	JWT          JWTConfig          `koanf:"jwt"`
+	WhatsApp     WhatsAppConfig     `koanf:"whatsapp"`
+	AI           AIConfig           `koanf:"ai"`
+	Storage      StorageConfig      `koanf:"storage"`
+	DefaultAdmin DefaultAdminConfig `koanf:"default_admin"`
+	RateLimit    RateLimitConfig    `koanf:"rate_limit"`
+	Cookie       CookieConfig       `koanf:"cookie"`
+	Calling      CallingConfig      `koanf:"calling"`
+	TTS          TTSConfig          `koanf:"tts"`
+	Integrations IntegrationsConfig `koanf:"integrations"`
+}
+
+// IntegrationsConfig holds integration configurations
+type IntegrationsConfig struct {
+	Evolution EvolutionConfig `koanf:"evolution"`
+	N8n       N8nConfig       `koanf:"n8n"`
+}
+
+// EvolutionConfig holds Evolution API configuration
+type EvolutionConfig struct {
+	Enabled bool   `koanf:"enabled"`
+	APIURL  string `koanf:"api_url"`
+	APIKey  string `koanf:"api_key"`
+}
+
+// N8nConfig holds n8n integration configuration
+type N8nConfig struct {
+	Enabled       bool   `koanf:"enabled"`
+	WebhookURL    string `koanf:"webhook_url"`
+	APIKey        string `koanf:"api_key"`
+	WebhookSecret string `koanf:"webhook_secret"`
 }
 
 type TTSConfig struct {
@@ -40,17 +62,17 @@ type ICEServerConfig struct {
 }
 
 type CallingConfig struct {
-	MaxCallDuration     int              `koanf:"max_call_duration"`
-	AudioDir            string           `koanf:"audio_dir"`
-	HoldMusicFile       string           `koanf:"hold_music_file"`
-	TransferTimeoutSecs int              `koanf:"transfer_timeout_secs"`
-	RingbackFile        string           `koanf:"ringback_file"`
-	UDPPortMin          uint16           `koanf:"udp_port_min"`  // WebRTC UDP port range start (default: 10000)
-	UDPPortMax          uint16           `koanf:"udp_port_max"`  // WebRTC UDP port range end (default: 10100)
-	PublicIP            string           `koanf:"public_ip"`     // Public IP for NAT mapping (required on AWS/cloud)
-	RelayOnly           bool             `koanf:"relay_only"`    // Force all media through TURN relay (no direct UDP)
+	MaxCallDuration     int               `koanf:"max_call_duration"`
+	AudioDir            string            `koanf:"audio_dir"`
+	HoldMusicFile       string            `koanf:"hold_music_file"`
+	TransferTimeoutSecs int               `koanf:"transfer_timeout_secs"`
+	RingbackFile        string            `koanf:"ringback_file"`
+	UDPPortMin          uint16            `koanf:"udp_port_min"` // WebRTC UDP port range start (default: 10000)
+	UDPPortMax          uint16            `koanf:"udp_port_max"` // WebRTC UDP port range end (default: 10100)
+	PublicIP            string            `koanf:"public_ip"`    // Public IP for NAT mapping (required on AWS/cloud)
+	RelayOnly           bool              `koanf:"relay_only"`   // Force all media through TURN relay (no direct UDP)
 	ICEServers          []ICEServerConfig `koanf:"ice_servers"`
-	RecordingEnabled    bool             `koanf:"recording_enabled"` // Enable call recording to S3
+	RecordingEnabled    bool              `koanf:"recording_enabled"` // Enable call recording to S3
 }
 
 type AppConfig struct {
@@ -65,8 +87,8 @@ type ServerConfig struct {
 	Port           int    `koanf:"port"`
 	ReadTimeout    int    `koanf:"read_timeout"`
 	WriteTimeout   int    `koanf:"write_timeout"`
-	BasePath       string `koanf:"base_path"`       // Base path for frontend (e.g., "/whatomate" for proxy pass)
-	AllowedOrigins string `koanf:"allowed_origins"`  // Comma-separated list of allowed CORS origins
+	BasePath       string `koanf:"base_path"`       // Base path for frontend (e.g., "/omni" for proxy pass)
+	AllowedOrigins string `koanf:"allowed_origins"` // Comma-separated list of allowed CORS origins
 }
 
 type DatabaseConfig struct {
@@ -91,9 +113,9 @@ type RedisConfig struct {
 }
 
 type JWTConfig struct {
-	Secret           string `koanf:"secret"`
-	AccessExpiryMins int    `koanf:"access_expiry_mins"`
-	RefreshExpiryDays int   `koanf:"refresh_expiry_days"`
+	Secret            string `koanf:"secret"`
+	AccessExpiryMins  int    `koanf:"access_expiry_mins"`
+	RefreshExpiryDays int    `koanf:"refresh_expiry_days"`
 }
 
 type WhatsAppConfig struct {
@@ -152,10 +174,10 @@ func Load(configPath string) (*Config, error) {
 		}
 	}
 
-	// Load from environment variables (WHATOMATE_ prefix)
-	// e.g., WHATOMATE_DATABASE_HOST -> database.host
-	if err := k.Load(env.Provider("WHATOMATE_", ".", func(s string) string {
-		return strings.ReplaceAll(strings.ToLower(strings.TrimPrefix(s, "WHATOMATE_")), "_", ".")
+	// Load from environment variables (OMNI_ prefix)
+	// e.g., OMNI_DATABASE_HOST -> database.host
+	if err := k.Load(env.Provider("OMNI_", ".", func(s string) string {
+		return strings.ReplaceAll(strings.ToLower(strings.TrimPrefix(s, "OMNI_")), "_", ".")
 	}), nil); err != nil {
 		return nil, err
 	}
@@ -173,7 +195,7 @@ func Load(configPath string) (*Config, error) {
 
 func setDefaults(cfg *Config) {
 	if cfg.App.Name == "" {
-		cfg.App.Name = "Whatomate"
+		cfg.App.Name = "Omni"
 	}
 	if cfg.App.Environment == "" {
 		cfg.App.Environment = "development"

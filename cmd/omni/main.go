@@ -10,19 +10,20 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/omni-platform/omni/internal/calling"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/database"
+	"github.com/omni-platform/omni/internal/frontend"
+	"github.com/omni-platform/omni/internal/handlers"
+	"github.com/omni-platform/omni/internal/integrations"
+	"github.com/omni-platform/omni/internal/middleware"
+	"github.com/omni-platform/omni/internal/queue"
+	"github.com/omni-platform/omni/internal/storage"
+	"github.com/omni-platform/omni/internal/tts"
+	"github.com/omni-platform/omni/internal/websocket"
+	"github.com/omni-platform/omni/internal/worker"
+	"github.com/omni-platform/omni/pkg/whatsapp"
 	"github.com/redis/go-redis/v9"
-	"github.com/shridarpatil/whatomate/internal/calling"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/storage"
-	"github.com/shridarpatil/whatomate/internal/tts"
-	"github.com/shridarpatil/whatomate/internal/database"
-	"github.com/shridarpatil/whatomate/internal/frontend"
-	"github.com/shridarpatil/whatomate/internal/handlers"
-	"github.com/shridarpatil/whatomate/internal/middleware"
-	"github.com/shridarpatil/whatomate/internal/queue"
-	"github.com/shridarpatil/whatomate/internal/websocket"
-	"github.com/shridarpatil/whatomate/internal/worker"
-	"github.com/shridarpatil/whatomate/pkg/whatsapp"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 	"github.com/zerodha/logf"
@@ -47,7 +48,7 @@ func main() {
 	case "import-omnis":
 		runImportOmnis(os.Args[2:])
 	case "version":
-		fmt.Printf("Whatomate %s (built %s)\n", Version, BuildTime)
+		fmt.Printf("Omni %s (built %s)\n", Version, BuildTime)
 	case "help", "-h", "--help":
 		printUsage()
 	default:
@@ -58,10 +59,10 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Println(`Whatomate - WhatsApp Business API Platform
+	fmt.Println(`Omni - WhatsApp Business API Platform
 
 Usage:
-  whatomate <command> [options]
+  omni <command> [options]
 
 Commands:
   server        Start the API server (with optional embedded workers)
@@ -80,16 +81,16 @@ Worker Options:
   -workers int      Number of workers to run (default 1)
 
 Examples:
-  whatomate server                     # API + 1 embedded worker
-  whatomate server -workers 0          # API only (no workers)
-  whatomate server -workers 4          # API + 4 embedded workers
-  whatomate server -migrate            # Run migrations and start server
-  whatomate worker -workers 4          # 4 workers only (no API)
+  omni server                     # API + 1 embedded worker
+  omni server -workers 0          # API only (no workers)
+  omni server -workers 4          # API + 4 embedded workers
+  omni server -migrate            # Run migrations and start server
+  omni worker -workers 4          # 4 workers only (no API)
 
 Deployment Scenarios:
-  All-in-one:    whatomate server
-  Separate:      whatomate server -workers 0  (on API server)
-                 whatomate worker -workers 4  (on worker server)`)
+  All-in-one:    omni server
+  Separate:      omni server -workers 0  (on API server)
+                 omni worker -workers 4  (on worker server)`)
 }
 
 // ============================================================================
@@ -109,10 +110,10 @@ func runServer(args []string) {
 		Level:           logf.DebugLevel,
 		EnableCaller:    true,
 		TimestampFormat: "2006-01-02 15:04:05",
-		DefaultFields:   []any{"app", "whatomate"},
+		DefaultFields:   []any{"app", "omni"},
 	})
 
-	lo.Info("Starting Whatomate server...", "version", Version)
+	lo.Info("Starting Omni server...", "version", Version)
 
 	// Load configuration
 	cfg, err := config.Load(*configPath)
@@ -138,7 +139,7 @@ func runServer(args []string) {
 		lo = logf.New(logf.Opts{
 			Level:           logf.InfoLevel,
 			TimestampFormat: "2006-01-02 15:04:05",
-			DefaultFields:   []any{"app", "whatomate"},
+			DefaultFields:   []any{"app", "omni"},
 		})
 	}
 
@@ -218,6 +219,27 @@ func runServer(args []string) {
 	app.S3Client = s3Client
 	lo.Info("Call manager initialized")
 
+	// Initialize Integration Manager (Evolution API, n8n, etc.)
+	integrationConfig := integrations.Config{
+		Evolution: integrations.EvolutionConfig{
+			Enabled: cfg.Integrations.Evolution.Enabled,
+			APIURL:  cfg.Integrations.Evolution.APIURL,
+			APIKey:  cfg.Integrations.Evolution.APIKey,
+		},
+		N8n: integrations.N8nConfig{
+			Enabled:       cfg.Integrations.N8n.Enabled,
+			WebhookURL:    cfg.Integrations.N8n.WebhookURL,
+			APIKey:        cfg.Integrations.N8n.APIKey,
+			WebhookSecret: cfg.Integrations.N8n.WebhookSecret,
+		},
+	}
+	app.IntegrationManager = integrations.NewManager(integrationConfig, lo)
+	if app.IntegrationManager.IsEvolutionEnabled() {
+		lo.Info("Evolution API integration enabled", "url", cfg.Integrations.Evolution.APIURL)
+	} else {
+		lo.Info("Evolution API integration disabled")
+	}
+
 	// Initialize TTS if configured (requires piper binary + model)
 	if cfg.TTS.PiperBinary != "" && cfg.TTS.PiperModel != "" {
 		app.TTS = &tts.PiperTTS{
@@ -236,6 +258,7 @@ func runServer(args []string) {
 
 	// Parse allowed origins for CORS
 	allowedOrigins := middleware.ParseAllowedOrigins(cfg.Server.AllowedOrigins)
+	isProduction := cfg.App.Environment == "production"
 
 	// Setup middleware (CORS is handled by corsWrapper at fasthttp level)
 	g.Before(middleware.SecurityHeaders())
@@ -248,11 +271,11 @@ func runServer(args []string) {
 
 	// Create server with CORS wrapper
 	server := &fasthttp.Server{
-		Handler:      corsWrapper(g.Handler(), allowedOrigins),
-		ReadTimeout:  time.Duration(cfg.Server.ReadTimeout) * time.Second,
-		WriteTimeout: time.Duration(cfg.Server.WriteTimeout) * time.Second,
+		Handler:            corsWrapper(g.Handler(), allowedOrigins, isProduction),
+		ReadTimeout:        time.Duration(cfg.Server.ReadTimeout) * time.Second,
+		WriteTimeout:       time.Duration(cfg.Server.WriteTimeout) * time.Second,
 		MaxRequestBodySize: 15 * 1024 * 1024,
-		Name:         "Whatomate",
+		Name:               "Omni",
 	}
 
 	// Start server in goroutine
@@ -349,10 +372,10 @@ func runWorker(args []string) {
 		Level:           logf.DebugLevel,
 		EnableCaller:    true,
 		TimestampFormat: "2006-01-02 15:04:05",
-		DefaultFields:   []any{"app", "whatomate-worker"},
+		DefaultFields:   []any{"app", "omni-worker"},
 	})
 
-	lo.Info("Starting Whatomate worker...", "version", Version)
+	lo.Info("Starting Omni worker...", "version", Version)
 
 	// Load configuration
 	cfg, err := config.Load(*configPath)
@@ -365,7 +388,7 @@ func runWorker(args []string) {
 		lo = logf.New(logf.Opts{
 			Level:           logf.InfoLevel,
 			TimestampFormat: "2006-01-02 15:04:05",
-			DefaultFields:   []any{"app", "whatomate-worker"},
+			DefaultFields:   []any{"app", "omni-worker"},
 		})
 	}
 
@@ -608,8 +631,37 @@ func setupRoutes(g *fastglue.Fastglue, app *handlers.App, lo logf.Logger, basePa
 
 	// Omnis
 	g.GET("/api/omnis/categories", app.ListOmnis)
+	g.POST("/api/omnis/categories", app.CreateCategory)
+	g.PUT("/api/omnis/categories/{id}", app.UpdateCategory)
+	g.DELETE("/api/omnis/categories/{id}", app.DeleteCategory)
+	g.POST("/api/omnis/scripts", app.CreateScript)
+	g.PUT("/api/omnis/scripts/{id}", app.UpdateScript)
+	g.DELETE("/api/omnis/scripts/{id}", app.DeleteScript)
+	g.POST("/api/omnis/scripts/{id}/media", app.UploadOmniMedia)
+	g.GET("/api/omnis/sequences", app.ListSequences)
+	g.POST("/api/omnis/sequences", app.CreateSequence)
+	g.PUT("/api/omnis/sequences/{id}", app.UpdateSequence)
+	g.DELETE("/api/omnis/sequences/{id}", app.DeleteSequence)
+	g.POST("/api/omnis/sequences/{id}/steps", app.AddSequenceStep)
+	g.DELETE("/api/omnis/sequences/{id}/steps/{step_id}", app.DeleteSequenceStep)
 	g.POST("/api/omnis/send", app.SendOmni)
+	g.POST("/api/omnis/send-sequence", app.SendSequence)
+	g.POST("/api/omnis/export", app.ExportOmnis)
+	g.GET("/api/omnis/export/zip", app.ExportOmnisZIP)
+	g.POST("/api/omnis/import", app.ImportOmnis)
+	g.POST("/api/omnis/import/zip", app.ImportOmnisFromZIP)
 	g.POST("/api/omnis/import", app.ImportOmnisZIP)
+
+	// Evolution API Integration
+	g.POST("/api/webhooks/evolution", app.EvolutionWebhook) // Webhook for Evolution
+	g.GET("/api/evolution/instances", app.ListEvolutionInstances)
+	g.POST("/api/evolution/instances", app.CreateEvolutionInstance)
+	g.GET("/api/evolution/instances/{id}", app.GetEvolutionInstance)
+	g.DELETE("/api/evolution/instances/{id}", app.DeleteEvolutionInstance)
+	g.GET("/api/evolution/instances/{id}/qrcode", app.GetEvolutionQRCode)
+	g.GET("/api/evolution/instances/{id}/connection", app.GetEvolutionConnectionStatus)
+	g.POST("/api/evolution/instances/{id}/disconnect", app.DisconnectEvolutionInstance)
+	g.POST("/api/evolution/send", app.SendEvolutionMessage)
 
 	// Conversation Notes
 	g.GET("/api/contacts/{id}/notes", app.ListConversationNotes)
@@ -846,15 +898,15 @@ func withRateLimit(handler fastglue.FastRequestHandler, opts middleware.RateLimi
 
 // corsWrapper wraps a handler with CORS support at the fasthttp level.
 // This ensures CORS headers are set even for auto-handled OPTIONS requests.
-func corsWrapper(next fasthttp.RequestHandler, allowedOrigins map[string]bool) fasthttp.RequestHandler {
+func corsWrapper(next fasthttp.RequestHandler, allowedOrigins map[string]bool, isProduction bool) fasthttp.RequestHandler {
 	return func(ctx *fasthttp.RequestCtx) {
 		origin := string(ctx.Request.Header.Peek("Origin"))
 
-		if origin != "" && middleware.IsOriginAllowed(origin, allowedOrigins) {
+		if origin != "" && middleware.IsOriginAllowed(origin, allowedOrigins, isProduction) {
 			ctx.Response.Header.Set("Access-Control-Allow-Origin", origin)
 			ctx.Response.Header.Set("Access-Control-Allow-Credentials", "true")
-		} else if len(allowedOrigins) == 0 && origin != "" {
-			// Development: no whitelist configured
+		} else if len(allowedOrigins) == 0 && !isProduction && origin != "" {
+			// Development only: no whitelist configured
 			ctx.Response.Header.Set("Access-Control-Allow-Origin", origin)
 		}
 

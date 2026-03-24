@@ -11,10 +11,11 @@ const localeModules = import.meta.glob('./locales/*.json', { eager: true, import
 // Build supported locales list from available files
 const localeNames: Record<string, { name: string; nativeName: string }> = {
   en: { name: 'English', nativeName: 'English' },
+  'pt-BR': { name: 'Portuguese (Brazil)', nativeName: 'Português (BR)' },
   es: { name: 'Spanish', nativeName: 'Español' },
   fr: { name: 'French', nativeName: 'Français' },
   de: { name: 'German', nativeName: 'Deutsch' },
-  hi: { name: 'Hindi', nativeName: 'हिंदी' },
+  hi: { name: 'Hindi', nativeName: 'हिन्दी' },
   pt: { name: 'Portuguese', nativeName: 'Português' },
   zh: { name: 'Chinese', nativeName: '中文' },
   ja: { name: 'Japanese', nativeName: '日本語' },
@@ -31,7 +32,6 @@ const localeNames: Record<string, { name: string; nativeName: string }> = {
   pl: { name: 'Polish', nativeName: 'Polski' },
   uk: { name: 'Ukrainian', nativeName: 'Українська' },
   ta: { name: 'Tamil', nativeName: 'தமிழ்' },
-
 }
 
 // Auto-generate SUPPORTED_LOCALES from available files
@@ -58,19 +58,24 @@ function getDefaultLocale(): string {
     return saved
   }
 
-  // Detect from browser
-  const browserLang = navigator.language.split('-')[0]
-  if (messages[browserLang]) {
-    return browserLang
+  // Detect from browser - prioritize pt-BR for Brazilian users
+  const browserLang = navigator.language
+  if (browserLang.startsWith('pt') && messages['pt-BR']) {
+    return 'pt-BR'
+  }
+  
+  const langCode = browserLang.split('-')[0]
+  if (messages[langCode]) {
+    return langCode
   }
 
-  return 'en'
+  return 'pt-BR' // Default to Portuguese (Brazil)
 }
 
 export const i18n = createI18n({
   legacy: false, // Use Composition API
   locale: getDefaultLocale(),
-  fallbackLocale: 'en',
+  fallbackLocale: 'pt-BR',
   messages,
 })
 

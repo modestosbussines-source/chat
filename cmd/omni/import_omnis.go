@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/config"
-	"github.com/shridarpatil/whatomate/internal/database"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/config"
+	"github.com/omni-platform/omni/internal/database"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/zerodha/logf"
 )
 

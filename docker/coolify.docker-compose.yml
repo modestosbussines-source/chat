@@ -1,0 +1,192 @@
+# ===================================================================
+# Omni Platform - Coolify Docker Compose
+# ===================================================================
+# Este arquivo é otimizado para deploy via Coolify
+# Todas as variáveis são injetadas pelo Coolify
+# ===================================================================
+
+version: '3.8'
+
+services:
+  # =================================================================
+  # OMNI APP - WhatsApp Business Platform
+  # =================================================================
+  omni:
+    image: ${OMNI_IMAGE:-omni/omni:latest}
+    container_name: omni_app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # App
+      - OMNI_APP_NAME=Omni
+      - OMNI_APP_ENVIRONMENT=production
+      - OMNI_APP_ENCRYPTION_KEY=${APP_ENCRYPTION_KEY}
+      
+      # Server
+      - OMNI_SERVER_HOST=0.0.0.0
+      - OMNI_SERVER_PORT=8080
+      - OMNI_SERVER_ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      
+      # Database (Coolify PostgreSQL)
+      - OMNI_DATABASE_HOST=${DATABASE_HOST:-omni-postgres}
+      - OMNI_DATABASE_PORT=5432
+      - OMNI_DATABASE_USER=${DATABASE_USER:-omni}
+      - OMNI_DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - OMNI_DATABASE_NAME=${DATABASE_NAME:-omni}
+      - OMNI_DATABASE_SSL_MODE=${DATABASE_SSL_MODE:-disable}
+      
+      # Redis (Coolify Redis)
+      - OMNI_REDIS_HOST=${REDIS_HOST:-omni-redis}
+      - OMNI_REDIS_PORT=6379
+      - OMNI_REDIS_PASSWORD=${REDIS_PASSWORD}
+      
+      # JWT
+      - OMNI_JWT_SECRET=${JWT_SECRET}
+      - OMNI_JWT_ACCESS_EXPIRY_MINS=15
+      - OMNI_JWT_REFRESH_EXPIRY_DAYS=7
+      
+      # WhatsApp Meta API (opcional - use Evolution API para WhatsApp)
+      - OMNI_WHATSAPP_WEBHOOK_VERIFY_TOKEN=${WHATSAPP_VERIFY_TOKEN:-}
+      - OMNI_WHATSAPP_API_VERSION=v21.0
+      
+      # ===== EVOLUTION API INTEGRATION =====
+      - OMNI_EVOLUTION_ENABLED=${EVOLUTION_ENABLED:-false}
+      - OMNI_EVOLUTION_API_URL=${EVOLUTION_API_URL:-http://evolution-api:8080}
+      - OMNI_EVOLUTION_API_KEY=${EVOLUTION_API_KEY:-}
+      
+      # ===== n8n INTEGRATION =====
+      - OMNI_N8N_ENABLED=${N8N_ENABLED:-false}
+      - OMNI_N8N_WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://n8n:5678/webhook}
+      - OMNI_N8N_API_KEY=${N8N_API_KEY:-}
+      - OMNI_N8N_WEBHOOK_SECRET=${N8N_WEBHOOK_SECRET:-}
+      
+      # Calling (WebRTC)
+      - OMNI_CALLING_PUBLIC_IP=${PUBLIC_IP:-}
+      - OMNI_CALLING_RECORDING_ENABLED=${RECORDING_ENABLED:-false}
+      - OMNI_CALLING_UDP_PORT_MIN=10000
+      - OMNI_CALLING_UDP_PORT_MAX=10100
+      
+      # Storage
+      - OMNI_STORAGE_TYPE=local
+      - OMNI_STORAGE_LOCAL_PATH=/app/uploads
+      
+      # Cookie
+      - OMNI_COOKIE_DOMAIN=${COOKIE_DOMAIN:-}
+      - OMNI_COOKIE_SECURE=true
+      
+      # Rate Limit
+      - OMNI_RATE_LIMIT_ENABLED=true
+      - OMNI_RATE_LIMIT_LOGIN_MAX_ATTEMPTS=10
+      - OMNI_RATE_LIMIT_REGISTER_MAX_ATTEMPTS=5
+      - OMNI_RATE_LIMIT_WINDOW_SECONDS=60
+      - OMNI_RATE_LIMIT_TRUST_PROXY=true
+      
+      # Default Admin
+      - OMNI_DEFAULT_ADMIN_EMAIL=${ADMIN_EMAIL:-admin@admin.com}
+      - OMNI_DEFAULT_ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
+      - OMNI_DEFAULT_ADMIN_FULL_NAME=${ADMIN_FULL_NAME:-Administrator}
+      
+      # TTS (Text-to-Speech for IVR)
+      - OMNI_TTS_PIPER_BINARY=/usr/local/bin/piper
+      - OMNI_TTS_PIPER_MODEL=/opt/piper/models/en_US-lessac-medium.onnx
+      
+      # Timezone
+      - TZ=${TZ:-UTC}
+      
+    volumes:
+      - omni_uploads:/app/uploads
+      - omni_audio:/app/audio
+      - omni_logs:/app/logs
+      
+    networks:
+      - omni-network
+      
+    depends_on:
+      omni-postgres:
+        condition: service_healthy
+      omni-redis:
+        condition: service_healthy
+        
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # =================================================================
+  # POSTGRESQL DATABASE
+  # =================================================================
+  omni-postgres:
+    image: postgres:17-alpine
+    container_name: omni_postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DATABASE_USER:-omni}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME:-omni}
+      - TZ=${TZ:-UTC}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - omni-network
+    command: >
+      postgres
+        -c shared_preload_libraries=pg_stat_statements
+        -c max_connections=200
+        -c shared_buffers=256MB
+        -c effective_cache_size=768MB
+        -c maintenance_work_mem=64MB
+        -c work_mem=4MB
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-omni}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =================================================================
+  # REDIS
+  # =================================================================
+  omni-redis:
+    image: redis:7-alpine
+    container_name: omni_redis
+    restart: unless-stopped
+    command: >
+      redis-server
+        --requirepass ${REDIS_PASSWORD}
+        --maxmemory 512mb
+        --maxmemory-policy allkeys-lru
+        --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - omni-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# =================================================================
+# VOLUMES
+# =================================================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  omni_uploads:
+    driver: local
+  omni_audio:
+    driver: local
+  omni_logs:
+    driver: local
+
+# =================================================================
+# NETWORKS
+# =================================================================
+networks:
+  omni-network:
+    driver: bridge

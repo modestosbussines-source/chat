@@ -4,12 +4,15 @@ import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
 import { api } from '@/services/api'
+import { toast } from 'vue-sonner'
+import { Loader2, Mail, Lock, ArrowRight } from 'lucide-vue-next'
+
+// OMNI Design System Components
+import AuthLayout from '@/components/auth/AuthLayout.vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { toast } from 'vue-sonner'
-import { MessageSquare, Loader2 } from 'lucide-vue-next'
 
 const { t } = useI18n()
 
@@ -25,9 +28,10 @@ const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
 const isLoading = ref(false)
+const rememberMe = ref(false)
 const ssoProviders = ref<SSOProvider[]>([])
 
-// SSO provider icons (using simple SVG paths)
+// SSO provider icons
 const providerIcons: Record<string, string> = {
   google: 'M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z',
   microsoft: 'M11 11H3V3h8v8zm10 0h-8V3h8v8zM11 21H3v-8h8v8zm10 0h-8v-8h8v8z',
@@ -36,25 +40,21 @@ const providerIcons: Record<string, string> = {
   custom: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'
 }
 
-// Dark-first: default is dark mode, light: prefix for light mode
 const providerColors: Record<string, string> = {
-  google: 'hover:bg-red-950 border-red-800 light:hover:bg-red-50 light:border-red-200',
-  microsoft: 'hover:bg-blue-950 border-blue-800 light:hover:bg-blue-50 light:border-blue-200',
-  github: 'hover:bg-gray-800 border-gray-600 light:hover:bg-gray-100 light:border-gray-300',
-  facebook: 'hover:bg-blue-950 border-blue-800 light:hover:bg-blue-50 light:border-blue-200',
-  custom: 'hover:bg-purple-950 border-purple-800 light:hover:bg-purple-50 light:border-purple-200'
+  google: 'hover:bg-red-50 hover:border-red-200 hover:text-red-600',
+  microsoft: 'hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600',
+  github: 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900',
+  facebook: 'hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700',
+  custom: 'hover:bg-primary/5 hover:border-primary/20 hover:text-primary'
 }
 
 onMounted(async () => {
-  // Check for SSO error in query params
   const ssoError = route.query.sso_error as string
   if (ssoError) {
     toast.error(decodeURIComponent(ssoError))
-    // Clear the error from URL
     router.replace({ query: { ...route.query, sso_error: undefined } })
   }
 
-  // Fetch enabled SSO providers
   try {
     const response = await api.get('/auth/sso/providers')
     ssoProviders.value = response.data.data || []
@@ -92,83 +92,116 @@ const initiateSSO = (provider: string) => {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[#0a0a0b] light:bg-gradient-to-br light:from-gray-50 light:to-gray-100 p-4">
-    <div class="w-full max-w-md rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur light:bg-white light:border-gray-200 light:shadow-xl">
-      <div class="p-8 space-y-1 text-center">
-        <div class="flex justify-center mb-4">
-          <div class="h-12 w-12 rounded-xl bg-black flex items-center justify-center shadow-md">
-            <MessageSquare class="h-7 w-7 text-white" />
-          </div>
+  <AuthLayout
+    :title="$t('auth.welcomeTitle')"
+    :subtitle="$t('auth.welcomeSubtitle')"
+  >
+    <!-- Login Form -->
+    <form @submit.prevent="handleLogin" class="space-y-5">
+      <!-- Email Field -->
+      <div class="space-y-2">
+        <Label for="email" class="text-sm font-medium">
+          {{ $t('common.email') }}
+        </Label>
+        <div class="relative">
+          <Mail class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            id="email"
+            v-model="email"
+            type="email"
+            :placeholder="$t('auth.emailPlaceholder')"
+            :disabled="isLoading"
+            autocomplete="email"
+            class="pl-10"
+          />
         </div>
-        <h2 class="text-2xl font-bold text-white light:text-gray-900">{{ $t('auth.welcomeTitle') }}</h2>
-        <p class="text-white/50 light:text-gray-500">
-          {{ $t('auth.welcomeSubtitle') }}
-        </p>
       </div>
 
-      <form @submit.prevent="handleLogin">
-        <div class="px-8 pb-4 space-y-4">
-          <div class="space-y-2">
-            <Label for="email" class="text-white/70 light:text-gray-700">{{ $t('common.email') }}</Label>
-            <Input
-              id="email"
-              v-model="email"
-              type="email"
-              :placeholder="$t('auth.emailPlaceholder')"
-              :disabled="isLoading"
-              autocomplete="email"
-            />
-          </div>
-          <div class="space-y-2">
-            <Label for="password" class="text-white/70 light:text-gray-700">{{ $t('auth.password') }}</Label>
-            <Input
-              id="password"
-              v-model="password"
-              type="password"
-              :placeholder="$t('auth.passwordPlaceholder')"
-              :disabled="isLoading"
-              autocomplete="current-password"
-            />
-          </div>
-          <Button type="submit" class="w-full bg-black hover:bg-zinc-800 text-white shadow-md" :disabled="isLoading">
-            <Loader2 v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
-            {{ $t('auth.signIn') }}
-          </Button>
+      <!-- Password Field -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <Label for="password" class="text-sm font-medium">
+            {{ $t('auth.password') }}
+          </Label>
+          <RouterLink
+            to="/forgot-password"
+            class="text-xs text-primary hover:text-primary/80 transition-colors"
+          >
+            {{ $t('auth.forgotPassword') }}
+          </RouterLink>
         </div>
-      </form>
-
-      <!-- SSO Section -->
-      <div v-if="ssoProviders.length > 0" class="px-8 pb-4 space-y-3">
-        <div class="relative my-2">
-          <Separator class="bg-white/[0.08] light:bg-gray-200" />
-          <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0b] light:bg-white px-2 text-xs text-white/40 light:text-gray-500">
-            {{ $t('auth.orContinueWith') }}
-          </span>
+        <div class="relative">
+          <Lock class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            id="password"
+            v-model="password"
+            type="password"
+            :placeholder="$t('auth.passwordPlaceholder')"
+            :disabled="isLoading"
+            autocomplete="current-password"
+            class="pl-10"
+          />
         </div>
+      </div>
 
+      <!-- Remember Me -->
+      <div class="flex items-center justify-between">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            v-model="rememberMe"
+            type="checkbox"
+            class="w-4 h-4 rounded border-border text-primary focus:ring-primary"
+          />
+          <span class="text-sm text-muted-foreground">{{ $t('auth.rememberMe') }}</span>
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <Button
+        type="submit"
+        class="w-full h-11"
+        :disabled="isLoading"
+      >
+        <Loader2 v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
+        <template v-else>
+          {{ $t('auth.signIn') }}
+          <ArrowRight class="ml-2 w-4 h-4" />
+        </template>
+      </Button>
+    </form>
+
+    <!-- SSO Section -->
+    <div v-if="ssoProviders.length > 0" class="mt-6">
+      <div class="relative my-6">
+        <Separator />
+        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-3 text-xs text-muted-foreground">
+          {{ $t('auth.orContinueWith') }}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
         <Button
           v-for="provider in ssoProviders"
           :key="provider.provider"
           variant="outline"
-          class="w-full justify-start gap-3 transition-colors bg-white/[0.04] border-white/[0.1] text-white/70 hover:bg-white/[0.08] hover:text-white light:bg-white light:border-gray-200 light:text-gray-700 light:hover:bg-gray-50"
+          class="h-11 justify-center gap-2 transition-all"
           :class="providerColors[provider.provider] || providerColors.custom"
           @click="initiateSSO(provider.provider)"
         >
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
             <path :d="providerIcons[provider.provider] || providerIcons.custom" />
           </svg>
-          {{ provider.name }}
+          <span class="text-sm">{{ provider.name }}</span>
         </Button>
       </div>
-
-      <div class="px-8 pb-8">
-        <p class="text-sm text-center text-white/40 light:text-gray-500">
-          {{ $t('auth.noAccount') }}
-          <RouterLink to="/register" class="text-zinc-500 light:text-zinc-900 font-semibold hover:underline">
-            {{ $t('auth.signUp') }}
-          </RouterLink>
-        </p>
-      </div>
     </div>
-  </div>
+
+    <!-- Footer -->
+    <template #footer>
+      {{ $t('auth.noAccount') }}
+      <RouterLink to="/register" class="text-primary font-medium hover:underline ml-1">
+        {{ $t('auth.signUp') }}
+      </RouterLink>
+    </template>
+  </AuthLayout>
 </template>

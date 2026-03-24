@@ -10,8 +10,8 @@ import (
 	"net/http"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/crypto"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/crypto"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 )

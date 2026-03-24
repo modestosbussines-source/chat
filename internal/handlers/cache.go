@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/models"
-	"github.com/shridarpatil/whatomate/internal/websocket"
+	"github.com/omni-platform/omni/internal/models"
+	"github.com/omni-platform/omni/internal/websocket"
 	"gorm.io/gorm"
 )
 
