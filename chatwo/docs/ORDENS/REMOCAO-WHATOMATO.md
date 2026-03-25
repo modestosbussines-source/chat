@@ -11,7 +11,7 @@
 
 > **NÃO SOMOS WHATOMATE.**
 >
-> O Whatomate é um projeto open-source de terceiros (shridarpatil/whatomate).
+> O Omni é um projeto open-source de terceiros (shridarpatil/omni).
 > Nós usamos o esqueleto/código-fonte como BASE para desenvolver o **OMNI**.
 >
 > **O Omni é:**
@@ -20,7 +20,7 @@
 > - Rebrandado, melhorado e otimizado para o mercado brasileiro
 > - Sem dependência ou associação ao projeto open-source original
 >
-> **TODA referência a "whatomate" deve ser REMOVIDA completamente.**
+> **TODA referência a "omni" deve ser REMOVIDA completamente.**
 > Código, docs, configs, nomes de arquivos, variáveis de ambiente, TUDO.
 
 ---
@@ -52,18 +52,18 @@
 | 3 | Atualizar .env.example | `docker/.env.example` | ⏳ |
 | 4 | Atualizar .goreleaser.yml | `.goreleaser.yml` | ⏳ |
 | 5 | Atualizar GitHub Actions | `.github/workflows/*.yml` | ⏳ |
-| 6 | Renomear bancos de teste | `*.yml` (whatomate_test → omni_test) | ⏳ |
+| 6 | Renomear bancos de teste | `*.yml` (omni_test → omni_test) | ⏳ |
 
 **Substituições:**
 ```bash
 # Dockerfile
-FROM whatomate → FROM omni
--o whatomate → -o omni
-CMD ["./whatomate" → CMD ["./omni"
+FROM omni → FROM omni
+-o omni → -o omni
+CMD ["./omni" → CMD ["./omni"
 
 # docker-compose
-POSTGRES_DB: whatomate → POSTGRES_DB: omni
-POSTGRES_DB: whatomate_test → POSTGRES_DB: omni_test
+POSTGRES_DB: omni → POSTGRES_DB: omni
+POSTGRES_DB: omni_test → POSTGRES_DB: omni_test
 ```
 
 ---
@@ -74,20 +74,20 @@ POSTGRES_DB: whatomate_test → POSTGRES_DB: omni_test
 |---|--------|----------|--------|
 | 1 | Atualizar Go imports | `internal/handlers/*.go` | ⏳ |
 | 2 | Atualizar module path | `go.mod` | ⏳ |
-| 3 | Renomear main.go output | `cmd/whatomate/` → `cmd/omni/` | ⏳ |
+| 3 | Renomear main.go output | `cmd/omni/` → `cmd/omni/` | ⏳ |
 | 4 | Atualizar modelos | `internal/models/*.go` | ⏳ |
 | 5 | Atualizar handlers | `internal/handlers/*.go` | ⏳ |
 
 **Substituições:**
 ```go
 // go.mod
-module github.com/shridarpatil/whatomate → module github.com/omni/platform
+module github.com/shridarpatil/omni → module github.com/omni/platform
 
 // imports
-"github.com/shridarpatil/whatomate/internal/models" → "github.com/omni/platform/internal/models"
+"github.com/shridarpatil/omni/internal/models" → "github.com/omni/platform/internal/models"
 
 // output
-log.Println("Whatomate") → log.Println("Omni")
+log.Println("Omni") → log.Println("Omni")
 ```
 
 ---
@@ -106,10 +106,10 @@ log.Println("Whatomate") → log.Println("Omni")
 
 **Substituições:**
 ```
-Whatomate → Omni
-whatomate → omni
-shridarpatil/whatomate → (remover referência)
-https://shridarpatil.github.io/whatomate → https://omni.com.br
+Omni → Omni
+omni → omni
+shridarpatil/omni → (remover referência)
+https://shridarpatil.github.io/omni → https://omni.com.br
 "Modern WhatsApp Business Platform" → "Plataforma Omnichannel Brasileira"
 ```
 
@@ -139,29 +139,29 @@ https://shridarpatil.github.io/whatomate → https://omni.com.br
 ### Arquivos Go
 ```bash
 # Imports
-find . -name "*.go" -exec sed -i 's|github.com/shridarpatil/whatomate|github.com/omni/platform|g' {} +
+find . -name "*.go" -exec sed -i 's|github.com/shridarpatil/omni|github.com/omni/platform|g' {} +
 
 # Strings
-find . -name "*.go" -exec sed -i 's|Whatomate|Omni|g' {} +
-find . -name "*.go" -exec sed -i 's|whatomate|omni|g' {} +
+find . -name "*.go" -exec sed -i 's|Omni|Omni|g' {} +
+find . -name "*.go" -exec sed -i 's|omni|omni|g' {} +
 ```
 
 ### Arquivos Markdown/MDX
 ```bash
-find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|Whatomate|Omni|g'
-find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|whatomate|omni|g'
-find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|shridarpatil/whatomate||g'
+find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|Omni|Omni|g'
+find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|omni|omni|g'
+find . -name "*.md" -o -name "*.mdx" | xargs sed -i 's|shridarpatil/omni||g'
 ```
 
 ### Arquivos Astro
 ```bash
-find . -name "*.astro" | xargs sed -i 's|Whatomate|Omni|g'
-find . -name "*.astro" | xargs sed -i 's|whatomate|omni|g'
+find . -name "*.astro" | xargs sed -i 's|Omni|Omni|g'
+find . -name "*.astro" | xargs sed -i 's|omni|omni|g'
 ```
 
 ### YAML/YML
 ```bash
-find . -name "*.yml" -o -name "*.yaml" | xargs sed -i 's|whatomate|omni|g'
+find . -name "*.yml" -o -name "*.yaml" | xargs sed -i 's|omni|omni|g'
 ```
 
 ---
@@ -172,13 +172,13 @@ Após todas as substituições, verificar:
 
 ```bash
 # Deve retornar 0 resultados
-grep -ri "whatomate" --include="*.go" --include="*.vue" --include="*.ts" --include="*.md" --include="*.yml" --include="*.astro" .
+grep -ri "omni" --include="*.go" --include="*.vue" --include="*.ts" --include="*.md" --include="*.yml" --include="*.astro" .
 
 # Deve retornar 0 resultados
 grep -ri "shridarpatil" --include="*.go" --include="*.vue" --include="*.ts" --include="*.md" --include="*.yml" --include="*.astro" .
 
 # Deve retornar 0 resultados
-grep -ri "Whatomate" .
+grep -ri "Omni" .
 ```
 
 ---
@@ -187,10 +187,10 @@ grep -ri "Whatomate" .
 
 | De | Para |
 |----|------|
-| `cmd/whatomate/` | `cmd/omni/` |
+| `cmd/omni/` | `cmd/omni/` |
 
 ```bash
-mv cmd/whatomate cmd/omni
+mv cmd/omni cmd/omni
 ```
 
 ---
@@ -202,12 +202,12 @@ mv cmd/whatomate cmd/omni
 ```
 📋 ORDEM DO STAKEHOLDER (Igor):
 
-O projeto NÃO é Whatomate. O Whatomate é um projeto open-source de terceiros
+O projeto NÃO é Omni. O Omni é um projeto open-source de terceiros
 que usamos como BASE/CODE SKELETON.
 
 Nós desenvolvemos o OMNI — um produto PRIVADO, PROPRIETÁRIO e 100% VENDÁVEL.
 
-TODAS as referências a "whatomate", "Whatomate", "shridarpatil/whatomate"
+TODAS as referências a "omni", "Omni", "shridarpatil/omni"
 devem ser REMOVIDAS completamente do seu escopo.
 
 Substitua por "Omni", "omni", ou remova a referência.
@@ -232,12 +232,12 @@ Execute as substituições e atualize o STATUS.md quando concluído.
 
 ## DEFINIÇÃO DE SUCESSO
 
-- [ ] 0 ocorrências de "whatomate" em todo o código
+- [ ] 0 ocorrências de "omni" em todo o código
 - [ ] 0 ocorrências de "shridarpatil" em todo o código
 - [ ] Build funciona: `go build -o omni ./cmd/omni`
 - [ ] Docker build funciona: `docker build -t omni .`
 - [ ] Todos os testes passam
-- [ ] Docs mostram "Omni" em vez de "Whatomate"
+- [ ] Docs mostram "Omni" em vez de "Omni"
 
 ---
 

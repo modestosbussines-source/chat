@@ -8,14 +8,14 @@
 
 ## 🚨 ORDEM PRIORITÁRIA
 
-> **TODOS OS SQUADS:** Remover TODAS as 184 referências a "whatomate" do projeto.
+> **TODOS OS SQUADS:** Remover TODAS as 184 referências a "omni" do projeto.
 > Veja: `/docs/ORDENS/REMOCAO-WHATOMATO.md`
 
 ---
 
 ## 🎨 UX/UI Design (Uma) — Terminal 1
 
-**Foco Atual:** Redesign + Design System + Remoção Whatomate
+**Foco Atual:** Redesign + Design System + Remoção Omni
 
 ### Progresso Fase 1
 | # | Tarefa | Status | Notas |
@@ -29,7 +29,7 @@
 | 7 | Auth components | ✅ Completo | Login/Register redesenhados |
 | 8 | i18n pt-BR | ✅ Completo | `pt-BR.json` criado |
 
-### 🚨 NOVA TAREFA - Remoção Whatomate
+### 🚨 NOVA TAREFA - Remoção Omni
 | # | Tarefa | Status | Prazo |
 |---|--------|--------|-------|
 | 1 | Verificar `frontend/src/**/*.ts` | ⏳ Pendente | IMEDIATO |
@@ -42,7 +42,7 @@
 
 ## 🚀 Core Platform (Dex) — Terminal 2
 
-**Foco Atual:** Backend + Integrações + Remoção Whatomate
+**Foco Atual:** Backend + Integrações + Remoção Omni
 
 ### Progresso Fase 1
 | # | Tarefa | Status | Notas |
@@ -54,13 +54,13 @@
 | 5 | IVR/Calling | ✅ Completo | 5 arquivos de calling |
 | 6 | WebSocket | ✅ Completo | Handlers atualizados |
 
-### 🚨 NOVA TAREFA - Remoção Whatomate
+### 🚨 NOVA TAREFA - Remoção Omni
 | # | Tarefa | Status | Prazo |
 |---|--------|--------|-------|
-| 1 | Renomear `cmd/whatomate/` → `cmd/omni/` | ⏳ Pendente | IMEDIATO |
+| 1 | Renomear `cmd/omni/` → `cmd/omni/` | ⏳ Pendente | IMEDIATO |
 | 2 | Atualizar `go.mod` module path | ⏳ Pendente | IMEDIATO |
 | 3 | Atualizar imports Go (~30 arquivos) | ⏳ Pendente | IMEDIATO |
-| 4 | Atualizar strings "Whatomate" | ⏳ Pendente | IMEDIATO |
+| 4 | Atualizar strings "Omni" | ⏳ Pendente | IMEDIATO |
 | 5 | Testar build: `go build -o omni ./cmd/omni` | ⏳ Pendente | IMEDIATO |
 
 **Fase 1 Completa:** 75% → **85% após remoção**
@@ -69,7 +69,7 @@
 
 ## ⚙️ DevOps (Gage) — Terminal 3
 
-**Foco Atual:** Infra + CI/CD + Remoção Whatomate (RESPONSÁVEL PRINCIPAL)
+**Foco Atual:** Infra + CI/CD + Remoção Omni (RESPONSÁVEL PRINCIPAL)
 
 ### Progresso Fase 1
 | # | Tarefa | Status | Notas |
@@ -80,10 +80,10 @@
 | 4 | DEPLOY_VPS.md | ✅ Completo | Documentação criada |
 | 5 | SECURITY_REPORT.md | ✅ Completo | Security audit |
 
-### 🚨 NOVA TAREFA - Remoção Whatomate (PRIORIDADE MÁXIMA)
+### 🚨 NOVA TAREFA - Remoção Omni (PRIORIDADE MÁXIMA)
 | # | Tarefa | Status | Prazo |
 |---|--------|--------|-------|
-| 1 | Dockerfile: `whatomate` → `omni` | ⏳ Pendente | IMEDIATO |
+| 1 | Dockerfile: `omni` → `omni` | ⏳ Pendente | IMEDIATO |
 | 2 | docker-compose: DB names | ⏳ Pendente | IMEDIATO |
 | 3 | `.goreleaser.yml` | ⏳ Pendente | IMEDIATO |
 | 4 | GitHub Actions (3 workflows) | ⏳ Pendente | IMEDIATO |
@@ -96,7 +96,7 @@
 
 ## 📈 Growth (Morgan) — Terminal 4
 
-**Foco Atual:** Docs + Remoção Whatomate (RESPÁVEL DOCS)
+**Foco Atual:** Docs + Remoção Omni (RESPÁVEL DOCS)
 
 ### Progresso Fase 1
 | # | Tarefa | Status | Notas |
@@ -109,7 +109,7 @@
 | 6 | CHANGELOG_OMNI.md | ✅ Completo | |
 | 7 | Landing page PRD | ✅ Completo | |
 
-### 🚨 NOVA TAREFA - Remoção Whatomate (RESPÁVEL PRINCIPAL DOCS)
+### 🚨 NOVA TAREFA - Remoção Omni (RESPÁVEL PRINCIPAL DOCS)
 | # | Tarefa | Status | Prazo |
 |---|--------|--------|-------|
 | 1 | Reescrever landing page (`index.astro`) | ⏳ Pendente | IMEDIATO |
@@ -126,7 +126,7 @@
 
 ## 🤖 AI/ML (Dara) — Terminal 5
 
-**Foco Atual:** Chatbot + IA + Remoção Whatomate
+**Foco Atual:** Chatbot + IA + Remoção Omni
 
 ### Progresso Fase 1
 | # | Tarefa | Status | Notas |
@@ -137,7 +137,7 @@
 | 4 | Custom actions | ✅ Completo | `custom_actions.go` |
 | 5 | IVR flows | ✅ Completo | `ivr_flows.go` |
 
-### 🚨 NOVA TAREFA - Remoção Whatomate
+### 🚨 NOVA TAREFA - Remoção Omni
 | # | Tarefa | Status | Prazo |
 |---|--------|--------|-------|
 | 1 | Verificar imports Go internos | ⏳ Pendente | IMEDIATO |
@@ -164,7 +164,7 @@
 ├─────────────────────────────────────────────────────────────────────────┤
 │  📁 Total: 128+ arquivos modificados                                    │
 │  📝 +3,649 linhas de código                                             │
-│  🚨 184 referências "whatomate" para remover                            │
+│  🚨 184 referências "omni" para remover                            │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -176,7 +176,7 @@
 
 | # | Tarefa | Responsável | Bloqueia |
 |---|--------|-------------|----------|
-| 1 | Remoção whatomate (184 refs) | TODOS | Build, Deploy |
+| 1 | Remoção omni (184 refs) | TODOS | Build, Deploy |
 | 2 | Build Go funcional | Core + DevOps | Deploy VPS |
 | 3 | Docker build funcional | DevOps | Deploy VPS |
 | 4 | Testes passando | QA | Deploy VPS |
@@ -202,7 +202,7 @@
 
 ## PRÓXIMOS PASSOS IMEDIATOS
 
-1. **AGORA:** Todos os squads iniciar remoção de "whatomate"
+1. **AGORA:** Todos os squads iniciar remoção de "omni"
 2. **1H:** DevOps testa build após remoção
 3. **2H:** Todos commitam mudanças
 4. **4H:** Deploy de staging para validação

@@ -12,7 +12,7 @@
 ```
 NÃO SOMOS WHATOMATE. SOMOS OMNI.
 
-O Whatomate é um projeto open-source de terceiros.
+O Omni é um projeto open-source de terceiros.
 Nós usamos o código como BASE para desenvolver o OMNI.
 
 O OMNI é:
@@ -21,7 +21,7 @@ O OMNI é:
 - Para o mercado brasileiro
 - Sem vínculo com projeto open-source
 
-REMOVA TODAS as 184 referências a "whatomate" AGORA.
+REMOVA TODAS as 184 referências a "omni" AGORA.
 Substitua por "Omni" ou remova.
 
 Isto é OBRIGATÓRIO e IMEDIATO.
@@ -33,7 +33,7 @@ Isto é OBRIGATÓRIO e IMEDIATO.
 
 ### Terminal 1 — @ux-design-expert (Uma)
 ```
-Sua tarefa: Remover referências a "whatomate" no frontend.
+Sua tarefa: Remover referências a "omni" no frontend.
 
 Arquivos para verificar:
 - frontend/src/**/*.ts
@@ -41,25 +41,25 @@ Arquivos para verificar:
 - frontend/src/i18n/locales/
 
 Substituir:
-- "whatomate" → "omni"
-- "Whatomate" → "Omni"
+- "omni" → "omni"
+- "Omni" → "Omni"
 
 Após: Atualize docs/STATUS.md com ✅
 ```
 
 ### Terminal 2 — @dev (Dex)
 ```
-Sua tarefa: Remover referências a "whatomate" no Go backend.
+Sua tarefa: Remover referências a "omni" no Go backend.
 
 Arquivos para verificar:
-- cmd/whatomate/ → Renomear para cmd/omni/
+- cmd/omni/ → Renomear para cmd/omni/
 - go.mod: module path
 - internal/**/*.go: imports e strings
 
 Substituir:
-- "github.com/shridarpatil/whatomate" → "github.com/omni/platform"
-- "Whatomate" → "Omni"
-- "whatomate" → "omni"
+- "github.com/shridarpatil/omni" → "github.com/omni/platform"
+- "Omni" → "Omni"
+- "omni" → "omni"
 
 Testar: go build -o omni ./cmd/omni
 
@@ -68,7 +68,7 @@ Após: Atualize docs/STATUS.md com ✅
 
 ### Terminal 3 — @devops (Gage)
 ```
-Sua tarefa: Remover referências a "whatomate" na infraestrutura.
+Sua tarefa: Remover referências a "omni" na infraestrutura.
 
 Arquivos para verificar:
 - docker/Dockerfile
@@ -78,9 +78,9 @@ Arquivos para verificar:
 - .github/workflows/*.yml
 
 Substituir:
-- "whatomate" → "omni"
-- "whatomate_test" → "omni_test"
-- Binário: ./whatomate → ./omni
+- "omni" → "omni"
+- "omni_test" → "omni_test"
+- Binário: ./omni → ./omni
 
 Testar: docker build -t omni .
 
@@ -89,7 +89,7 @@ Após: Atualize docs/STATUS.md com ✅
 
 ### Terminal 4 — @pm (Morgan)
 ```
-Sua tarefa: Remover referências a "whatomate" na documentação.
+Sua tarefa: Remover referências a "omni" na documentação.
 
 Arquivos para verificar:
 - docs/src/pages/index.astro
@@ -100,9 +100,9 @@ Arquivos para verificar:
 - SECURITY_REPORT.md
 
 Substituir:
-- "Whatomate" → "Omni"
-- "whatomate" → "omni"
-- "shridarpatil/whatomate" → remover
+- "Omni" → "Omni"
+- "omni" → "omni"
+- "shridarpatil/omni" → remover
 - URLs antigas → omni.com.br
 
 Após: Atualize docs/STATUS.md com ✅
@@ -110,7 +110,7 @@ Após: Atualize docs/STATUS.md com ✅
 
 ### Terminal 5 — @data-engineer (Dara)
 ```
-Sua tarefa: Verificar e remover referências a "whatomate" em handlers de IA.
+Sua tarefa: Verificar e remover referências a "omni" em handlers de IA.
 
 Arquivos para verificar:
 - internal/handlers/chatbot*.go
@@ -118,7 +118,7 @@ Arquivos para verificar:
 - internal/handlers/custom_actions*.go
 
 Substituir:
-- "whatomate" → "omni" (se houver)
+- "omni" → "omni" (se houver)
 
 Após: Atualize docs/STATUS.md com ✅
 ```
@@ -131,14 +131,14 @@ Após todas as remoções, execute em QUALQUER terminal:
 
 ```bash
 # Deve retornar 0 resultados
-grep -ri "whatomate" --include="*.go" --include="*.vue" --include="*.ts" --include="*.md" --include="*.yml" --include="*.astro" .
+grep -ri "omni" --include="*.go" --include="*.vue" --include="*.ts" --include="*.md" --include="*.yml" --include="*.astro" .
 ```
 
 ---
 
 ## CHECKLIST DE CONCLUSÃO FASE 1
 
-- [ ] 0 ocorrências de "whatomate" em todo o projeto
+- [ ] 0 ocorrências de "omni" em todo o projeto
 - [ ] 0 ocorrências de "shridarpatil" em todo o projeto
 - [ ] Build Go funcional
 - [ ] Docker build funcional
@@ -151,7 +151,7 @@ grep -ri "whatomate" --include="*.go" --include="*.vue" --include="*.ts" --inclu
 **Quando terminar, responda em cada terminal:**
 
 ```
-✅ [SQUAD NAME] — Whatomate removido. Próximos passos: [listar]
+✅ [SQUAD NAME] — Omni removido. Próximos passos: [listar]
 ```
 
 ---
