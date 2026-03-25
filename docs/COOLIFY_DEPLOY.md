@@ -1,4 +1,8 @@
-# 🚀 Omni + Coolify - Guia Completo de Deploy
+# 🚀 Omni + Coolify - Guia Completo de Deploy (Hostinger VPS)
+
+Guia passo a passo para fazer deploy do Omni via Coolify na Hostinger VPS com Ubuntu.
+
+---
 
 ## Visão Geral da Arquitetura
 
@@ -29,7 +33,56 @@
 
 ---
 
-## 📋 Pré-requisitos
+---
+
+## 📋 Pré-requisitos Rápidos
+
+- Hostinger VPS com Ubuntu 22.04+
+- Coolify instalado (comando: `curl -fsSL https://coolify.io/install.sh | bash`)
+- Domínio apontando para o IP da VPS
+
+---
+
+## ⚡ Resumo Rápido (Deploy Básico - Omni apenas)
+
+### 1. Acessar Coolify
+```
+http://IP_DA_VPS:8000
+```
+
+### 2. Criar PostgreSQL
+- Name: `omni-postgres`
+- Database: `omni`, User: `omni`
+- **Anote o Internal Hostname** (ex: `fpXXXX-omni-postgres`)
+
+### 3. Criar Redis
+- Name: `omni-redis`
+- **Anote o Internal Hostname**
+
+### 4. Criar Aplicação (Docker Compose)
+- Repo: `modestosbussines-source/chat`
+- Branch: `master`
+- Docker Compose: `docker/coolify.docker-compose.yml`
+
+### 5. Variáveis Obrigatórias
+```
+DATABASE_HOST=<hostname_postgres_do_coolify>
+DATABASE_PASSWORD=<senha_postgres>
+REDIS_HOST=<hostname_redis_do_coolify>
+REDIS_PASSWORD=<senha_redis>
+APP_ENCRYPTION_KEY=<openssl rand -base64 32>
+JWT_SECRET=<openssl rand -base64 64>
+ADMIN_EMAIL=admin@seudominio.com
+ADMIN_PASSWORD=<senha_forte>
+ALLOWED_ORIGINS=https://seudominio.com
+TZ=America/Sao_Paulo
+```
+
+### 6. Configurar Domínio e Deploy
+
+---
+
+## 📋 Pré-requisitos (Completo)
 
 ### VPS Recomendada
 - **CPU:** 4+ vCPUs
