@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: omni/omni
+          images: igormodestus/omni
           tags: |
             type=ref,event=branch
             type=sha,prefix=

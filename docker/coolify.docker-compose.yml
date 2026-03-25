@@ -12,7 +12,7 @@ services:
   # OMNI APP - WhatsApp Business Platform
   # =================================================================
   omni:
-    image: omni/omni:latest
+    image: igormodestus/omni:latest
     container_name: omni_app
     restart: unless-stopped
     ports:
