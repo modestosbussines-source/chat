@@ -12,9 +12,6 @@ services:
   # OMNI APP - WhatsApp Business Platform
   # =================================================================
   omni:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile
     image: omni/omni:latest
     container_name: omni_app
     restart: unless-stopped
