@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 )
@@ -267,13 +267,12 @@ func (a *App) getOrCreateEvolutionContact(instance *models.EvolutionInstance, ms
 
 	// Create new contact
 	contact = models.Contact{
-		BaseModel:        models.BaseModel{ID: uuid.New()},
-		OrganizationID:   instance.OrganizationID,
-		PhoneNumber:      formattedPhone,
-		Name:             msg.PushName,
-		WhatsAppAccount:  instance.InstanceName,
-		LastInboundAt:    func() *time.Time { t := time.Now(); return &t }(),
-		AssignmentStatus: "unassigned",
+		BaseModel:       models.BaseModel{ID: uuid.New()},
+		OrganizationID:  instance.OrganizationID,
+		PhoneNumber:     formattedPhone,
+		ProfileName:     msg.PushName,
+		WhatsAppAccount: instance.InstanceName,
+		LastInboundAt:   func() *time.Time { t := time.Now(); return &t }(),
 	}
 
 	if err := a.DB.Create(&contact).Error; err != nil {
@@ -333,20 +332,20 @@ func (a *App) processIncomingEvolutionMessage(ctx context.Context, instance *mod
 	}
 
 	// Create message record
+	now := time.Unix(msg.Timestamp, 0)
 	message := models.Message{
-		BaseModel:       models.BaseModel{ID: uuid.New()},
-		OrganizationID:  contact.OrganizationID,
-		ContactID:       contact.ID,
-		Direction:       models.DirectionInbound,
-		MessageType:     msgType,
-		Content:         textContent,
-		MediaURL:        localMediaPath,
-		MimeType:        msg.MimeType,
-		FileName:        msg.FileName,
-		Status:          models.MessageStatusDelivered,
-		ExternalID:      msg.Key.ID,
-		WhatsAppAccount: instance.InstanceName,
-		SentAt:          func() *time.Time { t := time.Unix(msg.Timestamp, 0); return &t }(),
+		BaseModel:         models.BaseModel{ID: uuid.New(), CreatedAt: now, UpdatedAt: now},
+		OrganizationID:    contact.OrganizationID,
+		ContactID:         contact.ID,
+		Direction:         models.DirectionIncoming,
+		MessageType:       msgType,
+		Content:           textContent,
+		MediaURL:          localMediaPath,
+		MediaMimeType:     msg.MimeType,
+		MediaFilename:     msg.FileName,
+		Status:            models.MessageStatusDelivered,
+		WhatsAppMessageID: msg.Key.ID,
+		WhatsAppAccount:   instance.InstanceName,
 	}
 
 	if err := a.DB.Create(&message).Error; err != nil {
@@ -354,7 +353,7 @@ func (a *App) processIncomingEvolutionMessage(ctx context.Context, instance *mod
 	}
 
 	// Update contact's last message
-	a.DB.Model(contact).Update("last_message_at", message.SentAt)
+	a.DB.Model(contact).Update("last_message_at", now)
 
 	// Broadcast message via WebSocket
 	a.broadcastEvolutionMessage(contact, &message)

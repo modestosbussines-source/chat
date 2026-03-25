@@ -3,7 +3,7 @@ import { Client } from 'pg'
 import { loginAsAdmin, ApiHelper } from '../../helpers'
 import { ChatPage } from '../../pages'
 
-const DB_URL = process.env.TEST_DATABASE_URL || 'postgres://whatomate:whatomate@127.0.0.1:5432/whatomate'
+const DB_URL = process.env.TEST_DATABASE_URL || 'postgres://omni:omni@127.0.0.1:5432/omni'
 
 async function execSQL(sql: string): Promise<string> {
   const client = new Client({ connectionString: DB_URL })

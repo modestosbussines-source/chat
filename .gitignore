@@ -1,6 +1,6 @@
 # Binaries
 /server
-/whatomate
+/omni
 bin/
 *.exe
 *.exe~

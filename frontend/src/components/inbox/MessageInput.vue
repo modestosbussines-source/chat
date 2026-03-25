@@ -205,8 +205,6 @@ const quickEmojis = ['😊', '😂', '❤️', '👍', '🙏', '🎉', '😍', '
           <Zap class="w-5 h-5" />
         </Button>
       </div>
-        </DropdownMenu>
-      </div>
 
       <!-- Hidden File Input -->
       <input

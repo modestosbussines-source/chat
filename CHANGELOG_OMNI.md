@@ -22,7 +22,7 @@
 | `internal/config/config.go` | Env prefix: `OMNI_`, default name: "Omni" |
 | `docker-compose.yml` | Container names: `omni_*` |
 | `Dockerfile` | Binary name: `omni` |
-| `cmd/whatomate/main.go` | CLI output: "Omni" |
+| `cmd/omni/main.go` | CLI output: "Omni" |
 
 ### 📁 Arquivos Criados/Modificados
 

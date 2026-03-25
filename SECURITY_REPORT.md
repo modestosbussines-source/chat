@@ -1,7 +1,7 @@
-# Relatório de Análise de Segurança - Whatomate
+# Relatório de Análise de Segurança - Omni
 
 **Data:** 2026-03-23
-**Projeto:** Whatomate (WhatsApp Business Platform)
+**Projeto:** Omni (WhatsApp Business Platform)
 **Analista:** Security Audit (Automated)
 
 ---
@@ -19,7 +19,7 @@ encryption_key = "4+weOBEEjlNyyqzRiAGmPrrFFZGFWQH29WAdzaLMFfU=" (config.toml:5)
 database password = "vyDpsMggRVbKFEWP6Dz/dg==" (config.toml:18)
 JWT secret = "JkejFO/3kAbJOJASJipGaIpzzNtkw72BY7Os749fcIAvi3ewlLo9P0T2jpx3X01ZLN4kbxHygl44kW0Q2Ncbp3A==" (config.toml:33)
 default_admin password = "WDzR3aztXzCLkdG7" (config.toml:63)
-POSTGRES_PASSWORD = "whatomate" (docker/.env.example:6)
+POSTGRES_PASSWORD = "omni" (docker/.env.example:6)
 ```
 
 **Impacto:** Qualquer pessoa com acesso ao repositório pode acessar bancos de dados, assumir contas de admin, e descriptografar dados sensíveis.
@@ -146,7 +146,7 @@ local_path = "./uploads"
 ---
 
 ### 8. Falta de Rate Limiting em Alguns Endpoints (MÉDIO)
-**Local:** `cmd/whatomate/main.go`
+**Local:** `cmd/omni/main.go`
 
 Rate limiting configurado apenas para auth endpoints:
 ```toml
@@ -170,7 +170,7 @@ Não há usuário não-root configurado:
 ```dockerfile
 WORKDIR /app
 # ... sem USER指令
-CMD ["./whatomate", "server", "-config", "config.toml", "-migrate"]
+CMD ["./omni", "server", "-config", "config.toml", "-migrate"]
 ```
 
 **Impacto:** Se container for comprometido, atacante tem acesso root.
@@ -204,7 +204,7 @@ func SecurityHeaders() fastglue.FastMiddleware {
 ## 🟢 VULNERABILIDADES BAIXAS
 
 ### 11. JWT Secret Validation Fraca (BAIXO)
-**Local:** `cmd/whatomate/main.go:123-128`
+**Local:** `cmd/omni/main.go:123-128`
 
 ```go
 // Validate JWT secret

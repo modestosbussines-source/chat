@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shridarpatil/whatomate/internal/models"
+	"github.com/omni-platform/omni/internal/models"
 	"github.com/valyala/fasthttp"
 	"github.com/zerodha/fastglue"
 )
@@ -327,17 +327,17 @@ func (a *App) SendEvolutionMessage(r *fastglue.Request) error {
 	}
 
 	// Save message to database
+	now := time.Now()
 	message := models.Message{
-		BaseModel:       models.BaseModel{ID: uuid.New()},
+		BaseModel:       models.BaseModel{ID: uuid.New(), CreatedAt: now, UpdatedAt: now},
 		OrganizationID:  orgID,
 		ContactID:       contact.ID,
-		Direction:       models.DirectionOutbound,
+		Direction:       models.DirectionOutgoing,
 		MessageType:     models.MessageTypeText,
 		Content:         req.Content,
 		Status:          models.MessageStatusSent,
 		WhatsAppAccount: instance.InstanceName,
 		SentByUserID:    &userID,
-		SentAt:          func() *time.Time { t := time.Now(); return &t }(),
 	}
 
 	if err := a.DB.Create(&message).Error; err != nil {
@@ -345,7 +345,7 @@ func (a *App) SendEvolutionMessage(r *fastglue.Request) error {
 	}
 
 	// Update contact last message
-	a.DB.Model(&contact).Update("last_message_at", message.SentAt)
+	a.DB.Model(&contact).Update("last_message_at", now)
 
 	// Broadcast via WebSocket
 	a.broadcastNewMessage(orgID, &message, &contact)
