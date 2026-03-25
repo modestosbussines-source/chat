@@ -15,8 +15,8 @@ services:
     image: igormodestus/omni:latest
     container_name: omni_app
     restart: unless-stopped
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
       # App
       - OMNI_APP_NAME=Omni
