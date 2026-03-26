@@ -93,7 +93,19 @@ services:
       
       # Timezone
       - TZ=${TZ:-UTC}
-      
+
+    labels:
+      # Traefik routing
+      - "traefik.enable=true"
+      - "traefik.http.routers.omni.rule=Host(`omnisys.site`)"
+      - "traefik.http.routers.omni.entrypoints=http,https"
+      - "traefik.http.routers.omni.tls=true"
+      - "traefik.http.routers.omni.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.omni-gzip.compress=true"
+      - "traefik.http.routers.omni.middlewares=omni-gzip"
+      # SERVICE UMBALANCER - ESSA LABEL FALTAVA!
+      - "traefik.http.services.omni.loadbalancer.server.url=http://omni:8081"
+
     volumes:
       - omni_uploads:/app/uploads
       - omni_audio:/app/audio
