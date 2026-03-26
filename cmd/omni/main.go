@@ -650,7 +650,7 @@ func setupRoutes(g *fastglue.Fastglue, app *handlers.App, lo logf.Logger, basePa
 	g.GET("/api/omnis/export/zip", app.ExportOmnisZIP)
 	g.POST("/api/omnis/import", app.ImportOmnis)
 	g.POST("/api/omnis/import/zip", app.ImportOmnisFromZIP)
-	g.POST("/api/omnis/import", app.ImportOmnisZIP)
+	// g.POST("/api/omnis/import", app.ImportOmnisZIP)
 
 	// Evolution API Integration
 	g.POST("/api/webhooks/evolution", app.EvolutionWebhook) // Webhook for Evolution
