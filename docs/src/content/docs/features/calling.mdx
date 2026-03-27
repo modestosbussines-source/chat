@@ -8,7 +8,7 @@ import ivrFlowExample from '../../../assets/ivr-flow-example.png';
 
 ## Overview
 
-Whatomate supports WhatsApp voice calling with WebRTC-based audio bridging. Incoming calls are handled by an Interactive Voice Response (IVR) system built using a visual drag-and-drop flow editor. The IVR plays greetings, collects DTMF input, makes HTTP callbacks, and routes callers to agent teams. Agents answer calls from the browser — no phone hardware required.
+Omni supports WhatsApp voice calling with WebRTC-based audio bridging. Incoming calls are handled by an Interactive Voice Response (IVR) system built using a visual drag-and-drop flow editor. The IVR plays greetings, collects DTMF input, makes HTTP callbacks, and routes callers to agent teams. Agents answer calls from the browser — no phone hardware required.
 
 <CardGrid>
   <Card title="Visual Flow Editor" icon="pencil">
@@ -30,7 +30,7 @@ Whatomate supports WhatsApp voice calling with WebRTC-based audio bridging. Inco
 <Steps>
 1. A WhatsApp user calls your business number
 2. WhatsApp sends a webhook with the SDP offer
-3. Whatomate establishes a WebRTC peer connection and runs the IVR flow
+3. Omni establishes a WebRTC peer connection and runs the IVR flow
 4. The caller hears greetings, presses digits (DTMF) to navigate menus, and provides input
 5. Based on the flow logic, the call is transferred to an agent team, routed to another flow, or hung up
 6. An available agent accepts the transfer in the browser and speaks with the caller
@@ -279,7 +279,7 @@ Calling is enabled per-organization in the database. Set `calling_enabled = true
 
 ## Text-to-Speech (IVR Greetings)
 
-Whatomate uses [Piper](https://github.com/OHF-Voice/piper1-gpl) for offline text-to-speech generation. When admins type greeting text in the IVR flow editor, the server generates OGG/Opus audio files using Piper + `opusenc`. This is optional — you can also upload pre-recorded audio files directly.
+Omni uses [Piper](https://github.com/OHF-Voice/piper1-gpl) for offline text-to-speech generation. When admins type greeting text in the IVR flow editor, the server generates OGG/Opus audio files using Piper + `opusenc`. This is optional — you can also upload pre-recorded audio files directly.
 
 ### Install Dependencies
 

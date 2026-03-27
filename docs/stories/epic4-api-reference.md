@@ -1,14 +1,14 @@
 # Epic 4: API Reference & Developer Guides
 
 ## Epic Goal
-Provide comprehensive API documentation with examples, SDK guides, and advanced development resources for developers building on the Whatomate platform.
+Provide comprehensive API documentation with examples, SDK guides, and advanced development resources for developers building on the Omni platform.
 
 ## Epic 4.1: REST API Reference
 
 ### Story 4.1.1: API Overview & Authentication
 **As a** developer,
 **I want** clear API documentation with authentication details,
-**so that** I can start integrating with Whatomate immediately.
+**so that** I can start integrating with Omni immediately.
 
 #### Acceptance Criteria
 1: API overview with base URL and versioning information
@@ -154,7 +154,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.2.1: Webhook Configuration & Events
 **As a** developer,
 **I want** comprehensive webhook documentation,
-**so that** I can receive real-time notifications from Whatomate.
+**so that** I can receive real-time notifications from Omni.
 
 #### Acceptance Criteria
 1: Webhook setup and verification process
@@ -178,7 +178,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.2.2: Integration Guides (CRM, E-commerce)
 **As a** business developer,
 **I want** integration guides for popular platforms,
-**so that** I can connect Whatomate with existing business tools.
+**so that** I can connect Omni with existing business tools.
 
 #### Acceptance Criteria
 1: Salesforce CRM integration guide
@@ -202,7 +202,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.2.3: Custom Plugin Development
 **As an** advanced developer,
 **I want** plugin development documentation,
-**so that** I can extend Whatomate functionality.
+**so that** I can extend Omni functionality.
 
 #### Acceptance Criteria
 1: Plugin architecture overview
@@ -228,7 +228,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.3.1: JavaScript/TypeScript SDK
 **As a** frontend or Node.js developer,
 **I want** a JavaScript/TypeScript SDK,
-**so that** I can integrate Whatomate easily into web applications.
+**so that** I can integrate Omni easily into web applications.
 
 #### Acceptance Criteria
 1: SDK installation and setup
@@ -252,7 +252,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.3.2: Python SDK
 **As a** Python developer,
 **I want** a Python SDK,
-**so that** I can integrate Whatomate into Python applications.
+**so that** I can integrate Omni into Python applications.
 
 #### Acceptance Criteria
 1: SDK installation and setup
@@ -276,7 +276,7 @@ Provide comprehensive API documentation with examples, SDK guides, and advanced 
 ### Story 4.3.3: Go SDK
 **As a** Go developer,
 **I want** a Go SDK,
-**so that** I can integrate Whatomate into Go applications.
+**so that** I can integrate Omni into Go applications.
 
 #### Acceptance Criteria
 1: SDK installation and setup

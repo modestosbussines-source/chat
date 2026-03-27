@@ -181,7 +181,7 @@ Enhance the documentation and landing page with search functionality, performanc
 ### Story 5.3.1: SEO Optimization
 **As a** project maintainer,
 **I want** documentation to be discoverable via search engines,
-**so that** new users can find Whatomate.
+**so that** new users can find Omni.
 
 #### Acceptance Criteria
 1: Proper meta tags for all pages

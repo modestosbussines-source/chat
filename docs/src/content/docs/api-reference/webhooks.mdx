@@ -7,11 +7,11 @@ import { Aside } from '@astrojs/starlight/components';
 
 ## Overview
 
-Whatomate receives webhooks from Meta's WhatsApp Business API and processes them automatically. You can also configure your own webhook endpoints to receive notifications about message events.
+Omni receives webhooks from Meta's WhatsApp Business API and processes them automatically. You can also configure your own webhook endpoints to receive notifications about message events.
 
 ## Meta Webhook Configuration
 
-Whatomate exposes webhook endpoints that you configure in your Meta App settings:
+Omni exposes webhook endpoints that you configure in your Meta App settings:
 
 ### Verification Endpoint
 
@@ -171,7 +171,7 @@ Always verify webhook requests are from Meta:
 2. Compute HMAC-SHA256 of the request body using your app secret
 3. Compare with the signature in the header
 
-Whatomate handles this verification automatically.
+Omni handles this verification automatically.
 
 <Aside type="caution">
   Keep your webhook verify token and app secret secure. Never expose them in client-side code.
@@ -179,7 +179,7 @@ Whatomate handles this verification automatically.
 
 ### Rate Limiting
 
-Meta may send webhooks at high volumes during campaigns. Whatomate:
+Meta may send webhooks at high volumes during campaigns. Omni:
 - Processes webhooks asynchronously
 - Queues events in Redis for processing
 - Handles duplicate events gracefully

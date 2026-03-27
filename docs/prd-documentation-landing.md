@@ -1,17 +1,17 @@
-# Whatomate Documentation & Landing Page Product Requirements Document (PRD)
+# Omni Documentation & Landing Page Product Requirements Document (PRD)
 
 ## Goals and Background Context
 
 ### Goals
-- **Documentation Excellence**: Establish comprehensive, user-friendly documentation covering all Whatomate features, API endpoints, and integration patterns, achieving 95% feature coverage within 3 months
+- **Documentation Excellence**: Establish comprehensive, user-friendly documentation covering all Omni features, API endpoints, and integration patterns, achieving 95% feature coverage within 3 months
 - **Landing Page Impact**: Create a compelling landing page that increases conversion from visitor to documentation reader by 40% and GitHub star growth by 25% within 6 months
 - **Developer Experience**: Reduce average onboarding time from 2 hours to 30 minutes through clear getting-started guides and interactive tutorials
 - **Community Growth**: Increase monthly active contributors by 50% and reduce support questions in GitHub issues by 60% through better documentation
-- **Business Value**: Enable Whatomate to compete with commercial WhatsApp Business platforms by providing enterprise-grade documentation quality
+- **Business Value**: Enable Omni to compete with commercial WhatsApp Business platforms by providing enterprise-grade documentation quality
 - **Technical Foundation**: Establish a scalable documentation architecture that supports future features, versions, and multi-language content
 
 ### Background Context
-Whatomate is a modern, open-source WhatsApp Business Platform built with Go and Vue.js. The current documentation structure exists but lacks comprehensive coverage of features, API endpoints, and developer guides. The project needs professional documentation and a landing page to attract developers and businesses looking for WhatsApp Business solutions.
+Omni is a modern, open-source WhatsApp Business Platform built with Go and Vue.js. The current documentation structure exists but lacks comprehensive coverage of features, API endpoints, and developer guides. The project needs professional documentation and a landing page to attract developers and businesses looking for WhatsApp Business solutions.
 
 The existing documentation uses Astro with Starlight but has limited content. A complete documentation suite and landing page will significantly improve the project's professionalism and usability.
 
@@ -23,7 +23,7 @@ The existing documentation uses Astro with Starlight but has limited content. A 
 ## Requirements
 
 ### Functional
-1. **FR1**: Landing page must showcase Whatomate's key features with interactive demos and screenshots
+1. **FR1**: Landing page must showcase Omni's key features with interactive demos and screenshots
 2. **FR2**: Documentation must include comprehensive getting started guides for Docker, binary, and source installation
 3. **FR3**: API reference section must document all REST endpoints with examples
 4. **FR4**: Feature documentation must cover all platform capabilities: multi-tenant, chatbot, campaigns, calling, etc.
@@ -33,7 +33,7 @@ The existing documentation uses Astro with Starlight but has limited content. A 
 8. **FR8**: Both landing page and documentation must be responsive and mobile-friendly
 9. **FR9**: Interactive API playground for testing endpoints directly in documentation
 10. **FR10**: Multi-language documentation support (English, Portuguese, Spanish)
-11. **FR11**: Version-specific documentation for different Whatomate releases
+11. **FR11**: Version-specific documentation for different Omni releases
 12. **FR12**: Community contribution system with guidelines and templates
 13. **FR13**: Automated documentation updates from codebase comments and API schemas
 14. **FR14**: Integration guides for popular services (Shopify, WooCommerce, Zapier, etc.)
@@ -51,7 +51,7 @@ The existing documentation uses Astro with Starlight but has limited content. A 
 ## User Interface Design Goals
 
 ### Overall UX Vision
-Create a professional, modern documentation experience that reflects the quality of the Whatomate platform. The landing page should immediately communicate value proposition and guide users to appropriate content (documentation, GitHub, demo).
+Create a professional, modern documentation experience that reflects the quality of the Omni platform. The landing page should immediately communicate value proposition and guide users to appropriate content (documentation, GitHub, demo).
 
 ### Key Interaction Paradigms
 - **Progressive disclosure**: Start with overview, allow drilling into details
@@ -71,7 +71,7 @@ Create a professional, modern documentation experience that reflects the quality
 WCAG AA compliance required for all documentation and landing page content
 
 ### Branding
-Use Whatomate's existing visual identity (green color scheme from dashboard screenshots). Maintain professional, tech-focused aesthetic that appeals to developers and business users.
+Use Omni's existing visual identity (green color scheme from dashboard screenshots). Maintain professional, tech-focused aesthetic that appeals to developers and business users.
 
 ### Target Device and Platforms
 Web Responsive - must work on desktop, tablet, and mobile devices
@@ -79,7 +79,7 @@ Web Responsive - must work on desktop, tablet, and mobile devices
 ## Technical Assumptions
 
 ### Repository Structure
-Monorepo - documentation lives within the main Whatomate repository under `/docs`
+Monorepo - documentation lives within the main Omni repository under `/docs`
 
 ### Service Architecture
 Static site generation using Astro with Starlight theme. Deployment via GitHub Pages or similar static hosting.
@@ -99,7 +99,7 @@ Static site generation using Astro with Starlight theme. Deployment via GitHub P
 ## Epic List
 
 ### Epic 1: Landing Page Foundation
-Establish the landing page structure, hero section, and core content sections that communicate Whatomate's value proposition.
+Establish the landing page structure, hero section, and core content sections that communicate Omni's value proposition.
 
 ### Epic 2: Documentation Structure & Getting Started
 Create comprehensive documentation structure with installation guides, quickstart tutorials, and basic configuration documentation.
@@ -116,11 +116,11 @@ Add search functionality, performance optimization, SEO, analytics, and final po
 ## Epic 1: Landing Page Foundation
 
 ### Goal
-Create a professional landing page that effectively communicates Whatomate's value proposition, showcases key features, and guides users to appropriate resources (documentation, GitHub, demo).
+Create a professional landing page that effectively communicates Omni's value proposition, showcases key features, and guides users to appropriate resources (documentation, GitHub, demo).
 
 ### Story 1.1: Landing Page Structure & Hero Section
-As a potential Whatomate user,
-I want to immediately understand what Whatomate is and its key benefits,
+As a potential Omni user,
+I want to immediately understand what Omni is and its key benefits,
 so that I can quickly decide if it meets my WhatsApp Business needs.
 
 **Acceptance Criteria:**
@@ -128,10 +128,10 @@ so that I can quickly decide if it meets my WhatsApp Business needs.
 2: Key feature highlights are visible without scrolling (3-4 main features)
 3: Clear navigation to documentation, GitHub repository, and demo
 4: Responsive design works on mobile, tablet, and desktop
-5: Professional visual design consistent with Whatomate brand
+5: Professional visual design consistent with Omni brand
 
 ### Story 1.2: Features Showcase Section
-As a business evaluating Whatomate,
+As a business evaluating Omni,
 I want to see detailed feature explanations with visual examples,
 so that I can understand how each feature addresses my business needs.
 
@@ -143,7 +143,7 @@ so that I can understand how each feature addresses my business needs.
 5: Links to detailed documentation for each feature
 
 ### Story 1.3: Use Cases & Testimonials
-As a decision-maker considering Whatomate,
+As a decision-maker considering Omni,
 I want to see real-world use cases and customer testimonials,
 so that I can validate the platform's effectiveness for similar businesses.
 
@@ -157,10 +157,10 @@ so that I can validate the platform's effectiveness for similar businesses.
 ## Epic 2: Documentation Structure & Getting Started
 
 ### Goal
-Establish a comprehensive documentation foundation with clear navigation, installation guides for all deployment methods, and quickstart tutorials that enable users to get Whatomate running quickly.
+Establish a comprehensive documentation foundation with clear navigation, installation guides for all deployment methods, and quickstart tutorials that enable users to get Omni running quickly.
 
 ### Story 2.1: Documentation Home & Navigation
-As a new Whatomate user,
+As a new Omni user,
 I want to easily find the information I need in the documentation,
 so that I can quickly learn and implement the platform.
 
@@ -185,7 +185,7 @@ so that I can choose the approach that best fits my environment.
 
 ### Story 2.3: Quickstart Tutorial
 As a first-time user,
-I want a guided tutorial that gets Whatomate running quickly,
+I want a guided tutorial that gets Omni running quickly,
 so that I can evaluate the platform without extensive setup.
 
 **Acceptance Criteria:**
@@ -198,7 +198,7 @@ so that I can evaluate the platform without extensive setup.
 ## Epic 3: Feature Documentation
 
 ### Goal
-Create comprehensive documentation for all Whatomate features, enabling users to understand, configure, and utilize the full capabilities of the platform.
+Create comprehensive documentation for all Omni features, enabling users to understand, configure, and utilize the full capabilities of the platform.
 
 ### Story 3.1: Core Platform Features
 As a platform administrator,
@@ -239,12 +239,12 @@ so that I can improve customer engagement and reduce manual work.
 ## Epic 4: API Reference & Developer Guides
 
 ### Goal
-Provide comprehensive API documentation with examples, SDK guides, and advanced development resources for developers building on the Whatomate platform.
+Provide comprehensive API documentation with examples, SDK guides, and advanced development resources for developers building on the Omni platform.
 
 ### Story 4.1: REST API Reference
 As a developer,
 I want complete API documentation with examples and authentication details,
-so that I can integrate Whatomate with other systems.
+so that I can integrate Omni with other systems.
 
 **Acceptance Criteria:**
 1: All API endpoints documented with request/response examples
@@ -268,14 +268,14 @@ so that I can build real-time applications and workflows.
 ### Story 4.3: Advanced Development Guides
 As an advanced developer,
 I want deep technical guides for customization and extension,
-so that I can tailor Whatomate to specific business requirements.
+so that I can tailor Omni to specific business requirements.
 
 **Acceptance Criteria:**
 1: Custom feature development guidelines
 2: Database schema and extension points documentation
 3: Performance optimization and scaling guides
 4: Deployment and infrastructure recommendations
-5: Contributing to Whatomate open-source project
+5: Contributing to Omni open-source project
 
 ## Epic 5: Polish & Optimization
 
@@ -325,7 +325,7 @@ so that I can understand usage patterns and improve content.
 ## Next Steps
 
 ### UX Expert Prompt
-Create a modern, professional design system for Whatomate documentation and landing page that emphasizes clarity, usability, and brand consistency. Focus on information hierarchy, responsive layouts, and interactive elements that enhance the learning experience.
+Create a modern, professional design system for Omni documentation and landing page that emphasizes clarity, usability, and brand consistency. Focus on information hierarchy, responsive layouts, and interactive elements that enhance the learning experience.
 
 ### Architect Prompt
 Design a scalable documentation architecture using Astro/Starlight that supports comprehensive content management, search functionality, and easy maintenance. Consider performance optimization, accessibility compliance, and integration with existing project structure.

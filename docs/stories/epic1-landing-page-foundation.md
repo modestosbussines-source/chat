@@ -1,17 +1,17 @@
 # Epic 1: Landing Page Foundation
 
 ## Epic Goal
-Create a professional landing page that effectively communicates Whatomate's value proposition, showcases key features, and guides users to appropriate resources (documentation, GitHub, demo).
+Create a professional landing page that effectively communicates Omni's value proposition, showcases key features, and guides users to appropriate resources (documentation, GitHub, demo).
 
 ## Epic 1.1: Landing Page Structure & Hero Section
 
 ### Story 1.1.1: Landing Page Layout & Navigation
-**As a** potential Whatomate user,
-**I want** to immediately understand what Whatomate is and its key benefits,
+**As a** potential Omni user,
+**I want** to immediately understand what Omni is and its key benefits,
 **so that** I can quickly decide if it meets my WhatsApp Business needs.
 
 #### Acceptance Criteria
-1: Hero section displays product name "Whatomate" with tagline "Modern WhatsApp Business Platform"
+1: Hero section displays product name "Omni" with tagline "Modern WhatsApp Business Platform"
 2: Primary CTA buttons: "Get Started" (links to documentation), "View on GitHub", "Live Demo"
 3: Secondary navigation: Features, Documentation, API Reference, Community, Blog
 4: Responsive navigation with mobile hamburger menu
@@ -31,7 +31,7 @@ Create a professional landing page that effectively communicates Whatomate's val
 
 ### Story 1.1.2: Feature Highlights Section
 **As a** business evaluator,
-**I want** to see the key features of Whatomate at a glance,
+**I want** to see the key features of Omni at a glance,
 **so that** I can quickly understand the platform's capabilities.
 
 #### Acceptance Criteria
@@ -55,7 +55,7 @@ Create a professional landing page that effectively communicates Whatomate's val
 
 ### Story 1.1.3: Product Showcase with Screenshots
 **As a** potential user,
-**I want** to see actual screenshots of the Whatomate interface,
+**I want** to see actual screenshots of the Omni interface,
 **so that** I can visualize how the platform looks and works.
 
 #### Acceptance Criteria
@@ -81,13 +81,13 @@ Create a professional landing page that effectively communicates Whatomate's val
 
 ### Story 1.2.1: Use Case Scenarios
 **As a** business decision-maker,
-**I want** to see real-world use cases for Whatomate,
+**I want** to see real-world use cases for Omni,
 **so that** I can understand how it applies to my business.
 
 #### Acceptance Criteria
 1: 4 detailed use case scenarios with business outcomes
 2: Use cases include: E-commerce automation, Customer support, Marketing campaigns, Internal communications
-3: Each use case includes: Business challenge, Solution with Whatomate, Results/metrics
+3: Each use case includes: Business challenge, Solution with Omni, Results/metrics
 4: Visual representation (diagrams, flowcharts) for complex use cases
 5: Links to detailed case studies or tutorials
 6: Testimonial quotes within use cases
@@ -105,7 +105,7 @@ Create a professional landing page that effectively communicates Whatomate's val
 
 ### Story 1.2.2: Customer Testimonials
 **As a** potential customer,
-**I want** to see testimonials from existing Whatomate users,
+**I want** to see testimonials from existing Omni users,
 **so that** I can build trust in the platform.
 
 #### Acceptance Criteria

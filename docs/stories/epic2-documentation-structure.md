@@ -1,12 +1,12 @@
 # Epic 2: Documentation Structure & Getting Started
 
 ## Epic Goal
-Establish a comprehensive documentation foundation with clear navigation, installation guides for all deployment methods, and quickstart tutorials that enable users to get Whatomate running quickly.
+Establish a comprehensive documentation foundation with clear navigation, installation guides for all deployment methods, and quickstart tutorials that enable users to get Omni running quickly.
 
 ## Epic 2.1: Documentation Home & Navigation
 
 ### Story 2.1.1: Documentation Home Page
-**As a** new Whatomate user,
+**As a** new Omni user,
 **I want** to land on a well-organized documentation home page,
 **so that** I can quickly find the information I need.
 
@@ -82,7 +82,7 @@ Establish a comprehensive documentation foundation with clear navigation, instal
 ### Story 2.2.1: Docker Installation Guide
 **As a** developer,
 **I want** step-by-step Docker installation instructions,
-**so that** I can deploy Whatomate quickly in a containerized environment.
+**so that** I can deploy Omni quickly in a containerized environment.
 
 #### Acceptance Criteria
 1: Prerequisites section (Docker, Docker Compose, system requirements)
@@ -105,7 +105,7 @@ Establish a comprehensive documentation foundation with clear navigation, instal
 
 ### Story 2.2.2: Binary Installation Guide
 **As a** developer,
-**I want** instructions for installing Whatomate as a binary,
+**I want** instructions for installing Omni as a binary,
 **so that** I can run it without containerization.
 
 #### Acceptance Criteria
@@ -129,7 +129,7 @@ Establish a comprehensive documentation foundation with clear navigation, instal
 
 ### Story 2.2.3: Build from Source Guide
 **As a** contributor or advanced user,
-**I want** instructions to build Whatomate from source,
+**I want** instructions to build Omni from source,
 **so that** I can customize or contribute to the project.
 
 #### Acceptance Criteria
@@ -154,7 +154,7 @@ Establish a comprehensive documentation foundation with clear navigation, instal
 ### Story 2.2.4: Configuration Documentation
 **As a** system administrator,
 **I want** comprehensive configuration documentation,
-**so that** I can properly configure Whatomate for my environment.
+**so that** I can properly configure Omni for my environment.
 
 #### Acceptance Criteria
 1: Complete configuration file reference
@@ -179,7 +179,7 @@ Establish a comprehensive documentation foundation with clear navigation, instal
 
 ### Story 2.3.1: 5-Minute Quickstart
 **As a** first-time user,
-**I want** a quick tutorial to get Whatomate running in 5 minutes,
+**I want** a quick tutorial to get Omni running in 5 minutes,
 **so that** I can evaluate the platform immediately.
 
 #### Acceptance Criteria

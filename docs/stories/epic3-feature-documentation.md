@@ -1,7 +1,7 @@
 # Epic 3: Feature Documentation
 
 ## Epic Goal
-Create comprehensive documentation for all Whatomate features, enabling users to understand, configure, and utilize the full capabilities of the platform.
+Create comprehensive documentation for all Omni features, enabling users to understand, configure, and utilize the full capabilities of the platform.
 
 ## Epic 3.1: Core Platform Features
 
@@ -178,7 +178,7 @@ Create comprehensive documentation for all Whatomate features, enabling users to
 ### Story 3.2.4: Webhook Configuration Guide
 **As a** developer,
 **I want** webhook configuration documentation,
-**so that** I can integrate Whatomate with external systems.
+**so that** I can integrate Omni with external systems.
 
 #### Acceptance Criteria
 1: Webhook event types and payloads
