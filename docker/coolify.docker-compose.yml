@@ -103,8 +103,8 @@ services:
       - "traefik.http.routers.omni.tls.certresolver=letsencrypt"
       - "traefik.http.middlewares.omni-gzip.compress=true"
       - "traefik.http.routers.omni.middlewares=omni-gzip"
-      # SERVICE UMBALANCER - ESSA LABEL FALTAVA!
-      - "traefik.http.services.omni.loadbalancer.server.url=http://10.0.2.5:8080"
+      # SERVICE UMBALANCER - usar nome do serviço agora que está na mesma network
+      - "traefik.http.services.omni.loadbalancer.server.url=http://omni:8080"
 
     volumes:
       - omni_uploads:/app/uploads
@@ -113,6 +113,8 @@ services:
       
     networks:
       - omni-network
+      - gv289znym4x27gt9rgq93n0c
+      - coolify
       
     depends_on:
       omni-postgres:
