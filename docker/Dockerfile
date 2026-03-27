@@ -56,9 +56,9 @@ RUN groupadd -r omni && useradd -r -g omni -d /app -s /sbin/nologin omni
 
 WORKDIR /app
 
-# Install runtime dependencies (TTS: espeak-ng, opus-tools; transcoding: ffmpeg)
+# Install runtime dependencies (TTS: espeak-ng, opus-tools; transcoding: ffmpeg, curl for healthcheck)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates tzdata espeak-ng opus-tools ffmpeg \
+    ca-certificates tzdata espeak-ng opus-tools ffmpeg curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy binary from builder
